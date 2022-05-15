@@ -5,7 +5,7 @@
 2) choose project title
  - Project Title: Student Attendance Record & Tracking: Web-based Application
 
-3) explanation each proposed 5 module
+3) explanation on each 5 proposed module
 
 4) Framework or no framework : no framework
 
