@@ -1,0 +1,26 @@
+1) explanation each proposed idea for the project title 
+
+2) choose project title
+ - Project Title: Student Attendance Record & Tracking: Web-based Application
+
+3) explanation each proposed 5 module
+
+4) Framework or no framework : no framework
+
+Module distributions:
+1) Manage class: Izzaty
+2) Report: Aidil
+3) Notification: Ayuni
+4) Manage User: Loh
+5) Attendance: Fatimah
+
+5) Decide leader
+ Leader Name: MUHAMMAD AIDIL SYAZWAN BIN HAMDAN
+ Matric ID: CA19144
+
+Coming soon: 
+1) Development standard
+2) Development kick-off (github tutorial)
+
+
+   
