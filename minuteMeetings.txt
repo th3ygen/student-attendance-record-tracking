@@ -1,3 +1,5 @@
+
+28/4/2022
 1) explanation each proposed idea for the project title 
 
 2) choose project title
@@ -18,9 +20,24 @@ Module distributions:
  Leader Name: MUHAMMAD AIDIL SYAZWAN BIN HAMDAN
  Matric ID: CA19144
 
-Coming soon: 
+Next Agenda: 
 1) Development standard
 2) Development kick-off (github tutorial)
 
 
+
+
+13/5/2022
+1) Development tools and framework discussion
+   - will be using VSCode as development IDE
+   - will be using GitGraph
+   - will be using node js instead php for backend
+2) Git/Github simple walkthrough (git init, add, commit, branch, push, merge)
+3) Development standard discussion
+   - need more time to decide which framework to implement
+
+
+Next Agenda:
+1) Project development progress discussion
+2) Development standard discussion
    
