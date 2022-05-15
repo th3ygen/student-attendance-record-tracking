@@ -15,5 +15,16 @@ module.exports = {
         } catch (error) {
             res.status(400).json({error});
         }
+    },
+    register: async (req, res) => {
+        try {
+            const { username, password } = req.body;
+
+            const token = User.register(username, password);
+
+            res.json({token});
+        } catch (error) {
+            res.status(400).json({error});
+        }
     }
 };
