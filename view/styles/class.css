@@ -9,7 +9,10 @@
     width: 100%;
     display: flex;
     flex-wrap: wrap;
-    gap: 80vw;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 20px;
 }
 
 .contTitle{
@@ -44,6 +47,7 @@
     display: flex;
     color: grey;
     justify-content: space-evenly; 
+    padding: 10px 0;
 }
 
 .contTabHeader-cname{
@@ -55,7 +59,40 @@
     height: 50px;
     background-color: bisque;
     display: flex;
+    flex-direction: column;
     color: grey;
-    justify-content: space-evenly; 
 }
 
+.tableContent .row {
+    width: 100%;
+    display: flex;
+
+    justify-content: space-around;
+}
+
+.actions {
+    display: flex;
+    gap: 15px;
+
+    align-items: center;
+}
+
+.actions .action {
+    border: 2px solid gold;
+
+    height: 35px;
+    width: 35px;
+
+    border-radius: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+i {
+    font-size: 20px !important;
+}
+/* .tabContent {
+    width: 100%;
+} */

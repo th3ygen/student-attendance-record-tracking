@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Layout</title>
 
+    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+    <!-- UNPKG -->
+<link href='https://unpkg.com/css.gg/icons/all.css' rel='stylesheet'>
+
     <link rel="stylesheet" href="../styles/global.css">
     <link rel="stylesheet" href="../styles/class.css">
 </head>
+
 <body>
     <div class="topbar">
         <div class="logo"></div>
@@ -57,29 +63,82 @@
                 </div>
             </div>
 
-            <div class="tableContent">
-                <div class="tabContent">
-                    English Class
+            <div id="wrapper"></div>
+            <!-- <div class="tableContent">
+                <div class="row">
+                    <div class="tabContent">
+                        English Class
+                    </div>
+                    <div class="tabContent">
+                        12.00pm - 2.00pm
+                        8.00am - 10.00am
+                    </div>
+                    <div class="tabContent">
+                        17
+                    </div>
+                    <div class="tabContent">
+                        30
+                    </div>
+                    <div class="tabContent">
+                        <div class="editButton"> Edit </div>
+                        <div class="delButton"> Delete </div>
+                        <div class="addStudButton"> Add Student </div>
+                    </div>
                 </div>
-                <div class="tabContent">
-                    12.00pm - 2.00pm
-                    8.00am - 10.00am
+                <div class="row">
+                    <div class="tabContent">
+                        English Class
+                    </div>
+                    <div class="tabContent">
+                        12.00pm - 2.00pm
+                        8.00am - 10.00am
+                    </div>
+                    <div class="tabContent">
+                        17
+                    </div>
+                    <div class="tabContent">
+                        30
+                    </div>
+                    <div class="tabContent">
+                        <div class="editButton"> Edit </div>
+                        <div class="delButton"> Delete </div>
+                        <div class="addStudButton"> Add Student </div>
+                    </div>
                 </div>
-                <div class="tabContent">
-                    17
-                </div>
-                <div class="tabContent">
-                    30
-                </div>
-                <div class="tabContent">
-                    <div class="editButton"> Edit </div>
-                    <div class="delButton"> Delete </div>
-                    <div class="addStudButton"> Add Student </div>
-                </div>
-            </div>
+            </div> -->
         </div>
 
 
     </div>
+
+    <script type="module">
+        import {
+            Grid,
+            html
+        } from "https://unpkg.com/gridjs?module";
+
+        new Grid({
+            columns: [{
+                name: "Class name",
+                width: "40%"
+            }, {
+                name: "Slot time",
+                width: "20%"
+            }, {
+                name: "Total students",
+                width: "10%"
+            }, {
+                name: "Max student",
+                width: "10%"
+            }, {
+                name: "Action",
+                width: "20%"
+            }],
+            data: [
+                ["John", "john@example.com", "35", "50", html("<div class='actions'><div class='action'><i class='gg-pen'></i></div><div class='action'><i class='gg-user-add'></i></div><div class='action'><i class='gg-trash'></i></div></div>")],
+            ]
+        }).render(document.getElementById("wrapper"));
+    </script>
 </body>
+
 </html>
