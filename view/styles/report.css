@@ -1,0 +1,53 @@
+.report {
+    width: 100%;
+
+    display: flex;   
+
+    padding: 0 100px;
+    padding-top: 180px;
+}
+
+.report .main {
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+
+    flex: 0 0 60%;
+}
+
+.report .side {
+    display: flex;
+    flex-direction: column;
+
+    flex: 0 0 40%;
+}
+
+.report .numbers {
+    display: flex;
+
+    width: 100%;
+
+    justify-content: space-between;
+}
+
+.report .numbers .seperator {
+    width: 2px;
+    height: 100%;
+
+    opacity: .5;
+
+    background-color: grey;
+}
+
+.report .numbers .item {
+    display: flex;
+    flex-direction: column;
+
+    justify-content: flex-end;
+}
+
+.report .numbers .item-b {
+    display: flex;
+    gap: 30px;
+}
