@@ -86,7 +86,16 @@
 							<span aria-hidden="true">&times;</span>
 						</button>
 					</div>
-					<div class="modal-body">...</div>
+					<div class="modal-body">
+                        <div class="modalCont">
+                            <select name="student" id="">
+                                <option value="Nur Izzaty bt Ariffin">Nur Izzaty bt Ariffin</option>
+                                <option value="Muhammad Danial b. Mohammad Rizwan">Muhammad Danial b. Mohammad Rizwan</option>
+                                <option value="Muhammad Aidil Syazwan b. Hamdan">Muhammad Aidil Syazwan b. Hamdan</option>
+                            </select>
+                        </div>
+
+                    </div>
 					<div class="modal-footer">
 						<button
 							type="button"
@@ -96,7 +105,7 @@
 							Close
 						</button>
 						<button type="button" class="btn btn-primary">
-							Save changes
+							Add Student
 						</button>
 					</div>
 				</div>
@@ -153,10 +162,10 @@
 						"50",
 						html(
 							`<div class='actions'>
-                                <button class='action' data-toggle='modal' data-target='#exampleModalCenter'>
-                                    <i class='gg-pen'></i>
-                                </button>
                                 <div class='action'>
+                                    <i class='gg-pen'></i>
+                                </div>
+                                <div class='action' data-toggle='modal' data-target='#exampleModalCenter'>
                                     <i class='gg-user-add'></i>
                                 </div><div class='action'>
                                     <i class='gg-trash'></i>
