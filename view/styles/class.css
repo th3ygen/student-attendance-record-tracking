@@ -29,6 +29,9 @@
 	border-radius: 10px;
 	text-align: center;
 	align-items: center;
+    cursor: pointer;
+
+	transition: 0.3s all;
 }
 
 .contTable {
