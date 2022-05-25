@@ -87,7 +87,16 @@
 					</div>
 				</div>
 
-				<div class="side"></div>
+				<div class="side">
+                    <div class="item">
+                        <div class="title">Attendance rate by class</div>
+                        <div id="table1"></div>
+                    </div>
+                    <div class="item">
+                        <div class="title">Absense students</div>
+                        <div id="table2"></div>
+                    </div>
+                </div>
 			</div>
 		</div>
 
@@ -122,7 +131,7 @@
 					groupDate: true,
 					maxDeviation: 0.5,
 					baseInterval: {
-						timeUnit: "day",
+						timeUnit: "minute",
 						count: "1",
 					},
 					renderer: am5xy.AxisRendererX.new(chart1, {
@@ -134,16 +143,16 @@
 
 			// Generate random data
 			function generateChartData() {
-				var chartData = [];
+				let chartData = [];
 				// current date
-				var firstDate = new Date();
+				let firstDate = new Date();
 				// now set 500 minutes back
 				firstDate.setMinutes(firstDate.getDate() - 500, 0, 0);
 
 				// and generate 500 data items
-				var visits = 500;
-				for (var i = 0; i < 500; i++) {
-					var newDate = new Date(firstDate);
+				let visits = 500;
+				for (let i = 0; i < 500; i++) {
+					let newDate = new Date(firstDate);
 					// each time we add one minute
 					newDate.setMinutes(newDate.getMinutes() + i);
 					// some random number
@@ -158,10 +167,10 @@
 				}
 				return chartData;
 			}
-			var data = generateChartData();
+			const data = generateChartData();
 
 			// Create series
-			var series = attRateChart.series.push(
+			const series = attRateChart.series.push(
 				am5xy.LineSeries.new(chart1, {
 					name: "Series",
 					xAxis: attRateXAxis,
@@ -186,8 +195,8 @@
 
 			// Pre-zoom X axis to last hour
 			series.events.once("datavalidated", function (ev, target) {
-				var lastDate = new Date(data[data.length - 1].date);
-				var firstDate = new Date(lastDate.getTime() - 3600000);
+				const lastDate = new Date(data[data.length - 1].date);
+				const firstDate = new Date(lastDate.getTime() - 3600000);
 				attRateXAxis.zoomToDates(firstDate, lastDate);
 			});
 
@@ -204,16 +213,16 @@
 
 			attRateYAxis.set("tooltip", am5.Tooltip.new(chart1, {}));
 
-			var scrollbarX = am5xy.XYChartScrollbar.new(chart1, {
+			const scrollbarX = am5xy.XYChartScrollbar.new(chart1, {
 				orientation: "horizontal",
 				height: 50,
 			});
 
 			attRateChart.set("scrollbarX", scrollbarX);
 
-			var sbxAxis = scrollbarX.chart.xAxes.push(
+			const sbxAxis = scrollbarX.chart.xAxes.push(
 				am5xy.DateAxis.new(chart1, {
-					baseInterval: { timeUnit: "day", count: 1 },
+					baseInterval: { timeUnit: "minute", count: 1 },
 					renderer: am5xy.AxisRendererX.new(chart1, {
 						opposite: false,
 						strokeOpacity: 0,
@@ -221,13 +230,13 @@
 				})
 			);
 
-			var sbyAxis = scrollbarX.chart.yAxes.push(
+			const sbyAxis = scrollbarX.chart.yAxes.push(
 				am5xy.ValueAxis.new(chart1, {
 					renderer: am5xy.AxisRendererY.new(chart1, {}),
 				})
 			);
 
-			var sbseries = scrollbarX.chart.series.push(
+			const sbseries = scrollbarX.chart.series.push(
 				am5xy.LineSeries.new(chart1, {
 					xAxis: sbxAxis,
 					yAxis: sbyAxis,
@@ -236,6 +245,41 @@
 				})
 			);
 			sbseries.data.setAll(data);
+		</script>
+
+		<script type="module">
+			import { Grid, html } from "https://unpkg.com/gridjs?module";
+
+			new Grid({
+				columns: [
+					{
+						name: "Student name",
+						width: "80%",
+					},
+					{
+						name: "Class",
+						width: "20%",
+					},
+				],
+				data: [
+					[
+						"Muhammad Aidil Syazwan bin Hamdan",
+						"Class A",
+					],
+					[
+						"Muhammad Aidil Syazwan bin Hamdan",
+						"Class A",
+					],
+					[
+						"Muhammad Aidil Syazwan bin Hamdan",
+						"Class A",
+					],
+					[
+						"Muhammad Aidil Syazwan bin Hamdan",
+						"Class A",
+					],
+				],
+			}).render(document.getElementById("table"));
 		</script>
 	</body>
 </html>

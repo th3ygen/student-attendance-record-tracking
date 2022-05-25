@@ -5,6 +5,8 @@
 
 	padding: 0 100px;
 	padding-top: 180px;
+
+	gap: 50px;
 }
 
 .report .main {
@@ -13,14 +15,14 @@
 
 	gap: 20px;
 
-	flex: 0 0 60%;
+	flex: 1 1 60%;
 }
 
 .report .side {
 	display: flex;
 	flex-direction: column;
 
-	flex: 0 0 40%;
+	flex: 1 1 40%;
 }
 
 .report .numbers {
