@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\controllers",
+    "\\models",
+    "\\routes",
+    "\\view",
+    "\\view\\res",
+    "\\view\\styles",
+    "\\view\\teacher"
+  ],
+  "SelectedNode": "\\view\\teacher\\AbsenceNotification.html",
+  "PreviewInSolutionExplorer": false
+}
