@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Layout</title>
 
-    <link rel="stylesheet" href="./styles/global.css">
+
+
+    <link href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="../styles/global.css">
+    <link rel="stylesheet" href="../styles/addClass.css">
 </head>
+
 <body>
     <div class="topbar">
         <div class="logo"></div>
         <nav class="nav">
-            <a href="index.php" class="active">Class</a>
+            <a href="ManageClass.html" class="active">Class</a>
             <a href="about.php">Attendance</a>
             <a href="contact.php">Report</a>
         </nav>
@@ -25,7 +32,111 @@
         </div>
     </div>
     <div class="container">
-        
+        <div class="classForm">
+            <div class="className">
+                <div class="name">Name</div>
+                <input type="text" name="className" id="className">
+            </div>
+            <div class="maxStudent">
+                <div class="max">
+                    Max Student
+                </div>
+                <input type="number" name="maxStudent" id="maxStudent">
+            </div>
+            <div class="timeSlot1">
+                <div class="timeSlot">
+                    Time Slot #1
+                </div>
+                <select name="timeSlot1" id="timeSlot1">
+                    <option value="08.00am-10.00am">08.00am-10.00am</option>
+                    <option value="10.00am-12.00pm">10.00am-12.00pm</option>
+                    <option value="12.00pm-02.00pm">12.00pm-02.00pm</option>
+                    <option value="02.00pm-04.00pm">02.00pm-04.00pm</option>
+                    <option value="04.00pm-06.00pm">04.00pm-06.00pm</option>
+                    <option value="08.00pm-10.00pm">08.00pm-10.00pm</option>
+                </select>
+            </div>
+            <div class="timeSlot2">
+                <div class="timeSlot">
+                    Time Slot #2
+                </div>
+                <select name="timeSlot2" id="timeSlot2">
+                    <option value="08.00am-10.00am">08.00am-10.00am</option>
+                    <option value="10.00am-12.00pm">10.00am-12.00pm</option>
+                    <option value="12.00pm-02.00pm">12.00pm-02.00pm</option>
+                    <option value="02.00pm-04.00pm">02.00pm-04.00pm</option>
+                    <option value="04.00pm-06.00pm">04.00pm-06.00pm</option>
+                    <option value="08.00pm-10.00pm">08.00pm-10.00pm</option>
+                </select>
+            </div>
+            <div class="studentList">
+                <div class="student">
+                    Student
+                </div>
+                <select name="student" id="">
+                    <option value="Nur Izzaty bt Ariffin">Nur Izzaty bt Ariffin</option>
+                    <option value="Muhammad Danial b. Mohammad Rizwan">Muhammad Danial b. Mohammad Rizwan</option>
+                    <option value="Muhammad Aidil Syazwan b. Hamdan">Muhammad Aidil Syazwan b. Hamdan</option>
+                </select>
+
+                <div class="contTable">
+                    <div id="table"></div>
+                </div>
+
+            </div>
+
+        </div>
     </div>
+
+    <script type="module">
+        import { Grid, html } from "https://unpkg.com/gridjs?module";
+
+        new Grid({
+            columns: [
+                {
+                    name: "*963",
+                    width: "40%",
+                },
+                {
+                    name: "Slot time",
+                    width: "20%",
+                },
+                {
+                    name: "Total students",
+                    width: "10%",
+                },
+                {
+                    name: "Max student",
+                    width: "10%",
+                },
+                {
+                    name: "Action",
+                    width: "20%",
+                },
+            ],
+            data: [
+                [
+                    "John",
+                    "john@example.com",
+                    "35",
+                    "50",
+                    html(
+                        `<div class='actions'>
+                                        <div class='action'>
+                                            <i class='gg-pen'></i>
+                                        </div>
+                                        <div class='action' data-toggle='modal' data-target='#exampleModalCenter'>
+                                            <i class='gg-user-add'></i>
+                                        </div><div class='action'>
+                                            <i class='gg-trash'></i>
+                                        </div>
+                                    </div>`
+                    ),
+                ],
+
+            ],
+        }).render(document.getElementById("table"));
+    </script>
 </body>
+
 </html>

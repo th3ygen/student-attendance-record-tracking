@@ -51,9 +51,9 @@
 				>
 					Add New Class
 				</button> -->
-                <button type="button" class="btn btn-primary" >
+                <a type="button" class="btn btn-primary"  href="./AddNewClass.html">
                     Add New Class
-                  </button>
+                </a>
 			</div>
 
 			<div class="contTable">
@@ -162,7 +162,7 @@
 						"50",
 						html(
 							`<div class='actions'>
-                                <div class='action'>
+                                <div class='action' onclick="location.href='./EditClass.html'" >
                                     <i class='gg-pen'></i>
                                 </div>
                                 <div class='action' data-toggle='modal' data-target='#exampleModalCenter'>
@@ -230,5 +230,10 @@
 				],
 			}).render(document.getElementById("table"));
 		</script>
+
+
+
+
+
 	</body>
 </html>
