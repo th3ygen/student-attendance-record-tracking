@@ -1,0 +1,108 @@
+.input[type=text]
+{
+  width: 100%;
+  padding: 10px;
+}
+
+.td
+{
+  text-align: center;
+}
+
+#list th, #list td
+{
+  border-width: medium;
+  border-style: solid;
+  background: white;
+  padding: 7px;
+  text-align: center;
+  margin-right: 500px;
+  margin-left: 100px;
+}
+
+#list th
+{
+  background-color: #ffd503;
+  color: white;
+}
+
+#list tr:nth-child(even)
+{
+  background-color: #f2f2f2;
+}
+
+#list tr:hover
+{
+  background-color: #ddd;
+}
+
+.input[type=button]
+{
+  background-color: #ffd600;
+      border: none;
+      color: black;
+      padding: 5px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 10%;
+}
+
+#greenlinks:link, #greenlinks:visited
+{
+  background-color: #00aea6;
+  color: white;
+  padding: 6px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 4px;
+  width: 70px;
+}
+
+#greenlinks:hover, #greenlinks:active
+{
+  background-color: #108872;
+  color: white;
+}
+
+#redlinks:link, #redlinks:visited
+{
+  background-color:#eb2d53;
+  color: white;
+  padding: 6px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 4px;
+  width: 70px;
+}
+
+#redlinks:hover, #redlinks:active
+{
+  background-color: #108872;
+  color: white;
+}
+
+#links:link, #links:visited
+{
+  display: flex;
+  background-color: #0000FF;
+  color: white;
+  padding: 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 4px;
+  width: 200px;
+  height: 50px;
+}
+
+#links:hover, #links:active
+{
+  background-color: #6161d4;
+  color: white;
+}
