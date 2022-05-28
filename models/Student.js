@@ -14,3 +14,7 @@ const studentSchema = new Schema({
         ref: 'Class'
     }],
 });
+
+const Student = model('Student', studentSchema);
+
+module.exports = Student || model('Student', studentSchema);

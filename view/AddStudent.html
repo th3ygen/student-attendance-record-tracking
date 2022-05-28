@@ -32,27 +32,61 @@
     </div>
     <div class="mcontainer" style="padding-top: 150px;">
         <section class="dashboard">
-            <form action="student_view.html">
+            <form id="form">
             
                 <br><br>
                 <h2 style="text-align:center"><b>Add New Student</b></h2>
                 <p style = "font-size: 15px; color:grey; text-align: center;">Fill in all new student details in the fields</p>
                 <br>
                 <input type="text" id="std_name" name="std_name" placeholder="Student Name" required/><br/>
-                <input type="email" id="std_email" name="std_email" placeholder="Student Email" required/><br/>
-                <input type="text" id="std_pass" name="std_pass" placeholder="Password" required/><br/>
+                <br>
+                <input type="text" id="std_id" name="std_id" placeholder="Student ID" required/><br/>
+                
                 <br>
                 <br>
-                <Button type="submit" name="submit" onclick="link()">Add New Student</button>
+                <Button type="submit" name="submit" >Add New Student</button>
             
             </form>
         </section>
     </div>
     <script type="text/javascript">
         function link(){
-            window.location = "student_view.html";
+            window.location = "StudentView.html";
         }
     
+        const form = document.querySelector('#form');
+
+        form.addEventListener('submit', newStudent);
+
+        async function newStudent(e) {
+            e.preventDefault();
+
+            const name = document.querySelector('#std_name').value;
+            const id = document.querySelector('#std_id').value;
+
+            const data = {
+                name,
+                id
+            };
+
+            const req = await fetch('http://localhost:3000/api/class/student/new', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+
+            if (req.status === 200) {
+                alert('Student added successfully');
+                window.location = "StudentView.html";
+            } else {
+                alert('Error adding student');
+            }
+
+            return true;
+        }
     </script>
     
 </body>

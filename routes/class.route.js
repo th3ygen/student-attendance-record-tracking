@@ -5,6 +5,9 @@ router.get('/', (req, res) => {
     res.send('Class API');
 });
 
+router.get('/student/get', controller.getStudents);
+
+router.post('/student/new', controller.newStudent);
 router.post('/add', controller.addClass);
 
 router.get('/enrolled', (req, res) => {

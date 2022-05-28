@@ -4,6 +4,40 @@ const _AttendanceRecord = require("../models/AttendanceRecord");
 const _Student = require('../models/Student');
 
 module.exports = {
+	newStudent: async (req, res) => {
+		try {
+			const { name, id } = req.body;
+
+			const student = new _Student({
+				name,
+				id,
+			});
+
+			await student.save();
+
+			res.json({
+				student,
+			});
+		} catch (e) {
+			res.status(500).json({
+				message: e.message,
+			});
+		}
+	},
+	getStudents: async (req, res) => {
+		try {
+			const students = await _Student.find({});
+
+			res.status(200).json({
+				students,
+			});
+
+		} catch (e) {
+			res.status(500).json({
+				message: e.message,
+			});
+		}
+	},
 	getTotalEnrolled: async (req, res) => {
 		try {
 			const classess = await _Class.find({});
@@ -75,5 +109,5 @@ module.exports = {
 			});
 		}
 	},
-	
+
 };

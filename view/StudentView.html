@@ -49,7 +49,7 @@
         </form>
         <br>
         <div class="cont">
-            <button><a href="add_student.html" title="Add New Student">
+            <button><a href="AddStudent.html" title="Add New Student">
             <i class="fa fa-plus" aria-hidden="true"></i> Add New Student
             </a></button>
         </div>
@@ -58,20 +58,35 @@
             <tr>
                 <th>Student ID</th>
                 <th>Student Name</th>
-                <th>Student Email</th>
-                <th>Student Password</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <!-- database looping here -->
-            <tbody>
-            <tr>
-            <td class="solid"> </td>
-            <td class="solid"> </td>
-            <td class="solid"> </td>
-            <td class="solid"> </td>
-            </tr>
+            <tbody id="list">
+            
             </tbody>       
         </table>
     </div>
+
+    <script>
+        window.onload = async () => {
+            const req = await fetch('http://localhost:3000/api/class/student/get');
+
+            const {students} = await req.json();
+
+            for (let student of students) {
+                document.querySelector('#list').innerHTML += `
+                    <tr>
+                        <td class="solid">${student.id}</td>
+                        <td class="solid">${student.name}</td>
+                        <td class="solid">
+                        </td>
+                    </tr>`;
+            }
+
+
+            console.log(students);
+        }
+    </script>
 </body>
 </html>
