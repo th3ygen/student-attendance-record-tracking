@@ -112,9 +112,10 @@ body {
     border-radius: 50%;
 }
 
-.container {
+.mcontainer {
     min-height: 100vh;
     width: 100%;
 
+    padding: 0 100px;
     padding-top: 150px;
 }

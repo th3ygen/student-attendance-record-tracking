@@ -1,0 +1,105 @@
+.container {
+    padding: 160px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    background-color: #FFA3A5;
+}
+
+.classForm {
+    padding: 20px;
+    width: 100%;
+    /* From https://css.glass */
+    background: rgba(222, 219, 210, 0.41);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(7.4px);
+    -webkit-backdrop-filter: blur(7.4px);
+    border: 1px solid rgba(255, 255, 255, 0.33);
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    gap: 20px;
+    
+}
+
+.itemForm:nth-child(odd){
+    flex: 0 0 40%;
+    
+
+}
+
+.itemForm:nth-child(even){
+    flex: 0 0 50%;
+}
+
+.listForm{
+    padding: 20px 50px;
+    width: 100%;
+}
+
+.inputForm{
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    
+    border: none;
+    border-bottom: solid;
+    margin-top: 20px;
+    background-color: none;
+}
+
+.listStudent{
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+
+    border: solid 1px teal;
+    border-radius: 5px;
+}
+
+.count{
+    padding: 10px 20px;
+    width: 100%;
+    background-color: darkcyan;
+    color: aliceblue;
+
+    display: flex;
+    justify-content: flex-end;
+    gap:10px;
+}
+
+.studentTable{
+    width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.stud{
+    margin: 10px;
+    width: 100%;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    
+
+    border: solid 1px teal;
+    border-radius: 5px;
+    
+}
+
+.button{
+    padding: 20px 40px;
+    background-color: teal;
+
+    border-radius: 10px;
+    cursor: pointer;
+    color: aliceblue;
+
+    display: flex;
+    justify-content: flex-end;
+}
+
