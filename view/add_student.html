@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Student</title>
+
+    <link rel="stylesheet" href="./styles/global.css">
+    <link rel="stylesheet" href="./styles/admin.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <div class="topbar">
+        <div class="logo"></div>
+        <nav class="nav">
+            <a href="admin_dashboard.html" >Dashboard</a>
+            <a href="student_view.html" class="active">Student</a>
+            <a href="lecturer_view.html" >Lecturer</a>
+            <a href="ManageClass.html">Class</a>
+            <a href="Report.html">Report</a>
+        </nav>
+        <div class="settings">
+            <div class="noti"></div>
+            <div class="user">
+                <div class="photo"></div>
+                <div class="name">Lorem ipsum dolor sit amet</div>
+            </div>
+        </div>
+    </div>
+    <div class="mcontainer" style="padding-top: 150px;">
+        <section class="dashboard">
+            <form action="student_view.html">
+            
+                <br><br>
+                <h2 style="text-align:center"><b>Add New Student</b></h2>
+                <p style = "font-size: 15px; color:grey; text-align: center;">Fill in all new student details in the fields</p>
+                <br>
+                <input type="text" id="std_name" name="std_name" placeholder="Student Name" required/><br/>
+                <input type="email" id="std_email" name="std_email" placeholder="Student Email" required/><br/>
+                <input type="text" id="std_pass" name="std_pass" placeholder="Password" required/><br/>
+                <br>
+                <br>
+                <Button type="submit" name="submit" onclick="link()">Add New Student</button>
+            
+            </form>
+        </section>
+    </div>
+    <script type="text/javascript">
+        function link(){
+            window.location = "student_view.html";
+        }
+    
+    </script>
+    
+</body>
+</html>
