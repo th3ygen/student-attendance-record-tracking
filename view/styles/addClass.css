@@ -1,18 +1,18 @@
-.container {
+.mcontainer {
     padding: 160px 40px;
     display: flex;
     flex-direction: column;
     gap: 50px;
-    background-color: #FFA3A5;
+    background-color: #f5f8e8;
 }
 
 .classForm {
     padding: 20px;
     width: 100%;
     /* From https://css.glass */
-    background: rgba(222, 219, 210, 0.41);
+    background: rgba(222, 219, 210, 0.50);
     border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(7.4px);
     -webkit-backdrop-filter: blur(7.4px);
     border: 1px solid rgba(255, 255, 255, 0.33);
@@ -45,9 +45,9 @@
     border-radius: 8px;
     
     border: none;
-    border-bottom: solid;
+    border-bottom: solid 2px #313715;
     margin-top: 20px;
-    background-color: none;
+    background-color: transparent;
 }
 
 .listStudent{
@@ -55,15 +55,15 @@
     display: flex;
     flex-wrap: wrap;
 
-    border: solid 1px teal;
+    border: solid 1px #313715;
     border-radius: 5px;
 }
 
 .count{
     padding: 10px 20px;
     width: 100%;
-    background-color: darkcyan;
-    color: aliceblue;
+    background-color: #313715;
+    color: #f5f8e8;
 
     display: flex;
     justify-content: flex-end;
@@ -86,20 +86,35 @@
     justify-content: space-between;
     
 
-    border: solid 1px teal;
+    border: solid 1px #313715;
     border-radius: 5px;
     
 }
 
-.button{
-    padding: 20px 40px;
-    background-color: teal;
 
-    border-radius: 10px;
-    cursor: pointer;
-    color: aliceblue;
-
+.but{
+    width: 100%;
     display: flex;
     justify-content: flex-end;
+
+    padding-right: 50px;
 }
 
+.button{
+    padding: 15px 40px;
+    background-color: #313715;
+
+    border-radius: 8px;
+    cursor: pointer;
+    color: #f5f8e8;
+    border: 2px solid #313715;
+
+    transition: 0.3s all;
+}
+
+.button:hover{
+    background-color: #f5f8e8;
+    color: #313715;
+    border: 2px solid #313715;
+
+}
