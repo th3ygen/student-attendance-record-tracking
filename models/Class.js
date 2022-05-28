@@ -5,6 +5,9 @@ const classSchema = new Schema({
         type: String,
         required: true
     },
+    timeSlot: [{
+        type: String
+    }],
     teacherId: {
         type: Schema.Types.ObjectId,
         ref: 'User',
