@@ -1,0 +1,41 @@
+﻿
+*{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.wrapper{
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+
+.btn_grp{
+	display: flex;
+}
+
+.btn_grp .btn{
+	width: 225px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	background: #fff;
+	margin: 0 10px;
+	border-radius: 3px;
+	cursor: pointer;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-size: 14px;
+}
+
+.btn_grp .btn.btn_info,
+.alert_item.alert_info{
+	/*background: #cde8f5;*/
+	background-color: #4480ae;
+	color: #fff;
+}
+
