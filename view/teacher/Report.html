@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Report</title>
 
-        <link
+		<link
 			href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
 			rel="stylesheet"
 		/>
@@ -15,6 +15,10 @@
 
 		<link rel="stylesheet" href="../styles/global.css" />
 		<link rel="stylesheet" href="../styles/report.css" />
+
+		<script src="https://kit.fontawesome.com/646cc00c51.js" crossorigin="anonymous"></script>
+
+		<!-- <script src="https://kit.fontawesome.com/35298e8662.js" crossorigin="anonymous"></script> -->
 	</head>
 	<body>
 		<div class="topbar">
@@ -34,8 +38,7 @@
 			</div>
 		</div>
 		<div class="mcontainer">
-
-            <!-- 
+			<!-- 
                 top analysis
                     - students
                     - attendance data completeness
@@ -46,60 +49,272 @@
 
                 absense list
              -->
-            <div class="report">
-                <div class="main">
-                    <div class="numbers">
-                        <div class="item">
-                            <div class="value">
-                                <span>
-                                    1337
-                                </span>
-                            </div>
-                            <div class="title">Students enrolled</div>
-                        </div>
-                        <div class="seperator"></div>
-                        <div class="item-b">
-                            <div class="item-sub">
-                                <div class="value">
-                                    <span>
-                                        1337
-                                    </span>
-                                </div>
-                                <div class="title">Total attend</div>
-                            </div>
-                            <div class="item-main">
-                                <div class="value">
-                                    <span>
-                                        1337
-                                    </span>
-                                </div>
-                                <div class="title">Attendance rate</div>
-                            </div>
-                            <div class="item-sub">
-                                <div class="value">
-                                    <span>
-                                        1337
-                                    </span>
-                                </div>
-                                <div class="title">Total absense</div>
-                            </div>
-                            
-                        </div>
-                        <div class="seperator"></div>
-                        <div class="item">
-                            <div class="value">
-                                <span>
-                                    1337
-                                </span>
-                            </div>
-                            <div class="title">Attendance date completeness</div>
-                        </div>
+			<div class="report">
+				<div class="main">
+					<div class="numbers">
+						<div class="item">
+							<div class="value">
+								<span> 1337 </span>
+							</div>
+							<div class="title">Students enrolled</div>
+						</div>
+						<div class="seperator"></div>
+						<div class="item-b">
+							<div class="item-sub">
+								<div class="value">
+									<span> 1337 </span>
+								</div>
+								<div class="title">Total attend</div>
+							</div>
+							<div class="item-main">
+								<div class="value">
+									<span> 98.7% </span>
+								</div>
+								<div class="title">Attendance rate</div>
+							</div>
+							<div class="item-sub">
+								<div class="value">
+									<span> 1337 </span>
+								</div>
+								<div class="title">Total absense</div>
+							</div>
+						</div>
+						<div class="seperator"></div>
+						<div class="item">
+							<div class="value">
+								<span> 100% </span>
+							</div>
+							<div class="title">Data completeness</div>
+						</div>
+					</div>
+					<div class="charts">
+						<div class="attRateChart" id="chart1"></div>
+					</div>
+				</div>
+
+				<div class="side">
+                    <div class="item">
+                        <div class="title">Attendance rate by class</div>
+                        <div id="table1"></div>
                     </div>
-                    <div class="charts"></div>
+                    <div class="item">
+                        <div class="title">Absense students</div>
+                        <div id="table2"></div>
+                    </div>
                 </div>
-                
-                <div class="side"></div>
-            </div>
-        </div>
+			</div>
+		</div>
+
+		<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+		<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+		<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
+		<script>
+			const chart1 = am5.Root.new("chart1");
+
+			chart1.setThemes([am5themes_Animated.new(chart1)]);
+
+			const attRateChart = chart1.container.children.push(
+				am5xy.XYChart.new(chart1, {
+					panX: true,
+					panY: true,
+					wheelY: "zoomX",
+					layout: chart1.verticalLayout,
+					pinchZoomX: true,
+				})
+			);
+
+			const attRateYAxis = attRateChart.yAxes.push(
+				am5xy.ValueAxis.new(chart1, {
+					maxDeviation: 1,
+					renderer: am5xy.AxisRendererY.new(chart1, { pan: "zoom" }),
+				})
+			);
+
+			const attRateXAxis = attRateChart.xAxes.push(
+				am5xy.DateAxis.new(chart1, {
+					groupDate: true,
+					maxDeviation: 0.5,
+					baseInterval: {
+						timeUnit: "minute",
+						count: "1",
+					},
+					renderer: am5xy.AxisRendererX.new(chart1, {
+						minGridDistance: 50,
+						pan: "zoom",
+					}),
+				})
+			);
+
+			// Generate random data
+			function generateChartData() {
+				let chartData = [];
+				// current date
+				let firstDate = new Date();
+				// now set 500 minutes back
+				firstDate.setMinutes(firstDate.getDate() - 500, 0, 0);
+
+				// and generate 500 data items
+				let visits = 500;
+				for (let i = 0; i < 500; i++) {
+					let newDate = new Date(firstDate);
+					// each time we add one minute
+					newDate.setMinutes(newDate.getMinutes() + i);
+					// some random number
+					visits += Math.round(
+						(Math.random() < 0.5 ? 1 : -1) * Math.random() * 10
+					);
+					// add data item to the array
+					chartData.push({
+						date: newDate.getTime(),
+						visits: visits,
+					});
+				}
+				return chartData;
+			}
+			const data = generateChartData();
+
+			// Create series
+			const series = attRateChart.series.push(
+				am5xy.LineSeries.new(chart1, {
+					name: "Series",
+					xAxis: attRateXAxis,
+					yAxis: attRateYAxis,
+					valueYField: "visits",
+					valueXField: "date",
+					tooltip: am5.Tooltip.new(chart1, {
+						pointerOrientation: "horizontal",
+						labelText:
+							"[bold]{name}[/]\n{valueX.formatDate()}: {valueY}",
+					}),
+				})
+			);
+
+			series.strokes.template.set("strokeWidth", 2);
+			series.fills.template.setAll({
+				visible: true,
+				fillOpacity: 0.4,
+			});
+
+			series.data.setAll(data);
+
+			// Pre-zoom X axis to last hour
+			series.events.once("datavalidated", function (ev, target) {
+				const lastDate = new Date(data[data.length - 1].date);
+				const firstDate = new Date(lastDate.getTime() - 3600000);
+				attRateXAxis.zoomToDates(firstDate, lastDate);
+			});
+
+			// Add cursor
+			attRateChart.set(
+				"cursor",
+				am5xy.XYCursor.new(chart1, {
+					behavior: "none",
+					xAxis: attRateXAxis,
+				})
+			);
+
+			attRateXAxis.set("tooltip", am5.Tooltip.new(chart1, {}));
+
+			attRateYAxis.set("tooltip", am5.Tooltip.new(chart1, {}));
+
+			const scrollbarX = am5xy.XYChartScrollbar.new(chart1, {
+				orientation: "horizontal",
+				height: 50,
+			});
+
+			attRateChart.set("scrollbarX", scrollbarX);
+
+			const sbxAxis = scrollbarX.chart.xAxes.push(
+				am5xy.DateAxis.new(chart1, {
+					baseInterval: { timeUnit: "minute", count: 1 },
+					renderer: am5xy.AxisRendererX.new(chart1, {
+						opposite: false,
+						strokeOpacity: 0,
+					}),
+				})
+			);
+
+			const sbyAxis = scrollbarX.chart.yAxes.push(
+				am5xy.ValueAxis.new(chart1, {
+					renderer: am5xy.AxisRendererY.new(chart1, {}),
+				})
+			);
+
+			const sbseries = scrollbarX.chart.series.push(
+				am5xy.LineSeries.new(chart1, {
+					xAxis: sbxAxis,
+					yAxis: sbyAxis,
+					valueYField: "visits",
+					valueXField: "date",
+				})
+			);
+			sbseries.data.setAll(data);
+		</script>
+
+		<script type="module">
+			import { Grid, html } from "https://unpkg.com/gridjs?module";
+
+			new Grid({
+				columns: [
+					{
+						name: "Class",
+						width: "80%",
+					},
+					{
+						name: "Rate",
+						width: "25%",
+					},
+				],
+				data: [
+					[
+						"Class A",
+						"97.2%",
+					],
+					[
+						"Class B",
+						"99.2%",
+					],
+					[
+						"Class C",
+						"100%",
+					],
+					[
+						"Class D",
+						"100%",
+					],
+				],
+			}).render(document.getElementById("table1"));
+			new Grid({
+				columns: [
+					{
+						name: "Student name",
+						width: "80%",
+					},
+					{
+						name: "Class",
+						width: "25%",
+					},
+				],
+				data: [
+					[
+						"Muhammad Aidil Syazwan bin Hamdan",
+						"Class A",
+					],
+					[
+						"Muhammad Aidil Syazwan bin Hamdan",
+						"Class A",
+					],
+					[
+						"Muhammad Aidil Syazwan bin Hamdan",
+						"Class A",
+					],
+					[
+						"Muhammad Aidil Syazwan bin Hamdan",
+						"Class A",
+					],
+				],
+			}).render(document.getElementById("table2"));
+		</script>
 	</body>
 </html>

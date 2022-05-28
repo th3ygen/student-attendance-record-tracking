@@ -1,53 +1,120 @@
 .report {
-    width: 100%;
+	width: 100%;
 
-    display: flex;   
+	display: flex;
 
-    padding: 0 100px;
-    padding-top: 180px;
+	padding: 50px 100px;
+	padding-top: 180px;
+
+	gap: 50px;
 }
 
 .report .main {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    gap: 20px;
+	gap: 20px;
 
-    flex: 0 0 60%;
+	flex: 1 1 70%;
 }
 
 .report .side {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    flex: 0 0 40%;
+	flex: 1 1 30%;
 }
 
 .report .numbers {
-    display: flex;
+	display: flex;
 
-    width: 100%;
+	width: 100%;
 
-    justify-content: space-between;
+	justify-content: space-between;
 }
 
 .report .numbers .seperator {
-    width: 2px;
-    height: 100%;
+	width: 2px;
+	height: 100%;
 
-    opacity: .5;
+	opacity: 0.5;
 
-    background-color: grey;
+	background-color: grey;
 }
 
 .report .numbers .item {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    justify-content: flex-end;
+	justify-content: flex-end;
+
+	flex: 1 1 30%;
 }
 
 .report .numbers .item-b {
-    display: flex;
-    gap: 30px;
+	display: flex;
+
+	width: 100%;
+	justify-content: space-around;
+
+	align-items: flex-end;
+}
+
+.report .numbers .item-b .item-sub {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.report .numbers .item .value {
+	font-size: 40px;
+	text-align: center;
+}
+
+.report .numbers .item .title {
+	font-size: 18px;
+	text-align: center;
+}
+
+.report .numbers .item-b .item-main .value {
+	font-size: 55px;
+}
+
+.report .numbers .item-b .item-main .title {
+	font-size: 18px;
+}
+
+.report .numbers .item-b .item-sub .value {
+	font-size: 25px;
+}
+
+.report .numbers .item-b .item-sub .title {
+	font-size: 14px;
+	padding-bottom: 2px;
+}
+
+.report .numbers .item-b .item-main {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.attRateChart {
+	width: 100%;
+	height: 500px;
+}
+
+.side {
+	display: flex;
+	flex-direction: column;
+
+	gap: 20px;
+}
+
+.side .item .title {
+	font-size: 20px;
+	font-weight: 500;
+	
+	padding: 10px;
+	
 }
