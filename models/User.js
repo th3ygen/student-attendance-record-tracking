@@ -9,6 +9,10 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    username: {
+        type: String,
+        required: true
+    },
     email: {
         type: String,
         required: true
@@ -19,22 +23,21 @@ const userSchema = new Schema({
     },
     role: {
         type: String,
-        enum: ['admin', 'student', 'teacher'],
-        required: true
-    },
-
+        enum: ['admin', 'teacher'],
+    }
 }, {
     timestamps: true
 });
 
-userSchema.statics.register = function (name, email, password, role) {
-    if (!['student', 'teacher'].includes(role)) {
-        role = 'student';
+userSchema.statics.register = function (name, email, username, password, role) {
+    if (!['admin', 'teacher'].includes(role)) {
+        role = 'teacher';
     }
 
     return this.create({
         name,
         email,
+        username,
         password: bcrypt.hashSync(password, 10),
         role
     });

@@ -29,8 +29,9 @@
 			<div class="logo"></div>
 			<nav class="nav">
 				<a href="#" class="active">Class</a>
-				<a href="about.php">Attendance</a>
-				<a href="contact.php">Report</a>
+				<a href="Attendance.html">Attendance</a>
+				<a href="Report.html">Report</a>
+				<a href="Notification.html">Notification</a>
 			</nav>
 			<div class="settings">
 				<div class="noti"></div>
@@ -231,9 +232,44 @@
 			}).render(document.getElementById("table"));
 		</script>
 
+		<script type="module">
+			import { Grid, html } from "https://unpkg.com/gridjs?module";
 
-
-
-
+			new Grid({
+				columns: [
+					{
+						name: "Class name",
+						width: "40%",
+					},
+					{
+						name: "Slot time",
+						width: "20%",
+					},
+					{
+						name: "Total students",
+						width: "10%",
+					},
+					{
+						name: "Max student",
+						width: "10%",
+					},
+					{
+						name: "Action",
+						width: "20%",
+					},
+				],
+				data: [
+					[
+						"John",
+						"john@example.com",
+						"35",
+						"50",
+						html(
+							"<div class='actions'><div class='action'><i class='gg-pen'></i></div><div class='action'><i class='gg-user-add'></i></div><div class='action'><i class='gg-trash'></i></div></div>"
+						),
+					],
+				],
+			}).render(document.getElementById("wrapper"));
+		</script>
 	</body>
 </html>

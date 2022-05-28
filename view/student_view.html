@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student View</title>
+
+    <link rel="stylesheet" href="./styles/global.css">
+    <link rel="stylesheet" href="./styles/admin.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <div class="topbar">
+        <div class="logo"></div>
+        <nav class="nav">
+            <a href="admin_dashboard.html" >Dashboard</a>
+            <a href="student_view.html" class="active">Student</a>
+            <a href="lecturer_view.html" >Lecturer</a>
+            <a href="ManageClass.html">Class</a>
+            <a href="Report.html">Report</a>
+        </nav>
+        <div class="settings">
+            <div class="noti"></div>
+            <div class="user">
+                <div class="photo"></div>
+                <div class="name">Lorem ipsum dolor sit amet</div>
+            </div>
+        </div>
+    </div>
+    <div class="mcontainer" style="padding-top: 150px;">
+        <section class="dashboard">
+            <div class="dash-content">
+                <div class="overview">
+                    <div class="title">
+                        <i class="uil uil-book-reader"></i>
+                        <span class="text">Students</span>
+                    </div>
+    
+        <form action="student_view.php" method="POST">
+            <div>
+                <div class="search">
+                    <input type="text" class="searchTerm" name="valueToSearch"  placeholder="Search for Student Name ...">
+                    <button class="searchButton" type="submit" name="search_btn" value="Search"><i class="fa fa-search"></i></button> 
+                </div>
+            </div>
+        </form>
+        <br>
+        <div class="cont">
+            <button><a href="add_student.html" title="Add New Student">
+            <i class="fa fa-plus" aria-hidden="true"></i> Add New Student
+            </a></button>
+        </div>
+        <table class="table table-striped table-condensed" id="tblData">
+            <thead>
+            <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Student Email</th>
+                <th>Student Password</th>
+            </tr>
+            </thead>
+            <!-- database looping here -->
+            <tbody>
+            <tr>
+            <td class="solid"> </td>
+            <td class="solid"> </td>
+            <td class="solid"> </td>
+            <td class="solid"> </td>
+            </tr>
+            </tbody>       
+        </table>
+    </div>
+</body>
+</html>

@@ -26,5 +26,18 @@ module.exports = {
         } catch (error) {
             res.status(400).json({error});
         }
+    },
+    newTeacher: async (req, res) => {
+        try {
+            const { name, email, username, password } = req.body;
+
+            const token = await User.register(name, email, username, password, 'teacher');
+
+            res.json({token});
+        } catch (e) {
+            res.status(500).json({
+                message: e.message,
+            });
+        }
     }
 };

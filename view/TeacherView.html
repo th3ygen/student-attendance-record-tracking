@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lecturer View</title>
+
+    <link rel="stylesheet" href="./styles/global.css">
+    <link rel="stylesheet" href="./styles/admin.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+    <div class="topbar">
+        <div class="logo"></div>
+        <nav class="nav">
+            <a href="admin_dashboard.html" >Dashboard</a>
+            <a href="student_view.html" >Student</a>
+            <a href="lecturer_view.html" class="active">Lecturer</a>
+            <a href="ManageClass.html">Class</a>
+            <a href="Report.html">Report</a>
+        </nav>
+        <div class="settings">
+            <div class="noti"></div>
+            <div class="user">
+                <div class="photo"></div>
+                <div class="name">Lorem ipsum dolor sit amet</div>
+            </div>
+        </div>
+    </div>
+    <div class="mcontainer" style="padding-top: 150px;">
+        <section class="dashboard">
+            <div class="dash-content">
+                <div class="overview">
+                    <div class="title">
+                        <i class="fa fa-user-circle"></i>
+                        <span class="text">Lecturers</span>
+                    </div>
+    
+        <form action="lecturer_view.html" method="POST">
+            <div>
+                <div class="search">
+                    <input type="text" class="searchTerm" name="valueToSearch"  placeholder="Search for Lecturer Name ...">
+                    <button class="searchButton" type="submit" name="search_btn" value="Search"><i class="fa fa-search"></i></button> 
+                </div>
+            </div>
+        </form>
+        <br>
+        <div class="cont">
+            <button><a href="AddTeacher.html" title="Add New Lecturer">
+            <i class="fa fa-plus" aria-hidden="true"></i> Add New Lecturer
+            </a></button>
+        </div>
+        <table class="table table-striped table-condensed" id="tblData">
+            <thead>
+            <tr>
+                <th>Lecturer ID</th>
+                <th>Lecturer Name</th>
+                <th>Lecturer Email</th>
+                <th>Lecturer Password</th>
+            </tr>
+            </thead>
+            <!-- database looping here -->
+            <tbody>
+            <tr>
+            <td class="solid"> </td>
+            <td class="solid"> </td>
+            <td class="solid"> </td>
+            <td class="solid"> </td>
+            </tr>
+            </tbody>       
+        </table>
+    </div>
+</body>
+</html>
