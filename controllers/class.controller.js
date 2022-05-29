@@ -189,5 +189,29 @@ module.exports = {
 				message: e.message,
 			});
 		}
+	},
+	getClass: async (req, res) => {
+		try {
+			const _class = await _Class.findById(req.params.id);
+
+			if (!_class) {
+				return res.status(404).json({
+					message: "Class not found",
+				});
+			}
+
+			// get all enrolled students
+			const students = await _Student.find({
+				classEnrolled: _class._id
+			});
+
+			res.status(200).json({
+				class: _class, students
+			});
+		} catch (e) {
+			res.status(500).json({
+				message: e.message,
+			});
+		}
 	}
 };

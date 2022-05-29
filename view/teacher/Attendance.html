@@ -15,6 +15,8 @@
 
 		<link rel="stylesheet" href="../styles/global.css" />
 		<link rel="stylesheet" href="../styles/class.css" />
+		<link rel="stylesheet" href="../styles/attendance.css" />
+
 </head>
 <body>
     <div class="topbar">
@@ -34,68 +36,46 @@
         </div>
     </div>
     <div class="mcontainer">
-    <h1>Salam world!</h1>
+      <div class="header">
+        <div class="title"></div>
+        <div class="actions">
+          <div class="btn-add">
+            Add Attendance
+          </div>
+        </div>
+      </div>
+      <div id="table"></div>
     </div>
   </div>
+  
+  <script type="module">
+    import { Grid, html } from "https://unpkg.com/gridjs?module";
 
-  <section>
-
-    <br><br><br><br><br><br>
-
-    <h1 style="text-align:center" margin-top="500px">Attendance</h1><hr>
-    <br><br>
-
-    <p>
-
-
-      <center>
-
-        <div class="table-wrapper-scroll-y my-custom-scrollbar">
-
-          <p>
-            <a id="links" align="right" value="Create Attendance" href="CreateAttendance.html">Create Attendance</a>
-            <br><br>
-          </p>
-
-          <table class="table table-bordered table-striped mb-0">
-            <table style="width:80%" border="margin-right: 400px; margin-left: 100px; ">
-
-              <tr id="list">
-                <td style="background-color:#bcbccc; color: black"><b>CLASS NAME</b></td>
-                <td style="background-color:#bcbccc; color: black"><b>DATE</b></td>
-                <td style="background-color:#bcbccc; color: black"><b>TIME SLOT</b></td>
-                <td style="background-color:#bcbccc; color: black"><b>TOTAL STUDENT</b></td>
-                <td colspan="2" style="background-color:#bcbccc; color: black"><b>ACTIONS</b></td>
-              </tr>
-
-
-              <!--
-              <?php
-              $n = 0;
-              while($row=databasename_fetch_assoc($result))
-              {
-              $ClassName = $row['Class'];
-              $Date = $row['Date'];
-              $TimeSlot = $row['TimeSlot'];
-              $TotalStudent = $row['TotalStudent'];
-              ?>
-              <tr id="list">
-              <td><?php echo $# ?></td>
-              <td><?php echo $# ?></td>
-              <td><?php echo $#?></td>
-              <td><?php echo $# ?></td>
-              <td><a id="greenlinks" href="#?#=<?php echo $#?>">Edit</a></td>
-              <td><a id="redlinks" onclick="#" href="#?#=<?php echo $# ?>">Delete</a></td>
-            </tr>
-            <?php
-          }
-          ?> -->
-
-        </table><br>
-
-      </div>
-    </center>
-
-  </section>
+    new Grid({
+						columns: [
+							{
+								name: "Class name",
+								width: "40%",
+							},
+							{
+								name: "Slot time",
+								width: "20%",
+							},
+							{
+								name: "Total students",
+								width: "10%",
+							},
+							{
+								name: "Max student",
+								width: "10%",
+							},
+							{
+								name: "Action",
+								width: "20%",
+							},
+						],
+						data: [],
+					}).render(document.getElementById("table"));
+  </script>
 </body>
 </html>

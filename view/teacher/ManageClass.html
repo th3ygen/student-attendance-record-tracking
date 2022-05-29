@@ -211,7 +211,7 @@
 							c.class.maxStudent,
 							html(
 								`<div class='actions'>
-									<div class='action' onclick="location.href='./EditClass.html'" >
+									<div id="edit_${c.class._id}" class='action' onclick="location.href='./EditClass.html'" >
 										<i class='gg-pen'></i>
 									</div>
 									<div id="btn_${c.class._id}" class='action' data-toggle='modal' data-target='#exampleModalCenter'>
@@ -269,6 +269,9 @@
 
 					setTimeout(() => {
 						for (let id of ids) {
+							document.querySelector(`#edit_${id}`).addEventListener('click', () => {
+								localStorage.setItem('classId', id);
+							});
 							document.querySelector(`#btn_${id}`).addEventListener('click', () => {
 								activeClass = id;
 							});
