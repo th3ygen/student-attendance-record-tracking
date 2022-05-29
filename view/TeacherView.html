@@ -56,22 +56,69 @@
         <table class="table table-striped table-condensed" id="tblData">
             <thead>
             <tr>
-                <th>Lecturer ID</th>
                 <th>Lecturer Name</th>
+                <th>Lecturer Username</th>
                 <th>Lecturer Email</th>
-                <th>Lecturer Password</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <!-- database looping here -->
             <tbody>
             <tr>
-            <td class="solid"> </td>
-            <td class="solid"> </td>
-            <td class="solid"> </td>
-            <td class="solid"> </td>
             </tr>
             </tbody>       
         </table>
     </div>
+
+    <script>
+        async function deleteTeacher(id) {
+            const conf = confirm("Are you sure?");
+            if(conf == true){
+                const req = await fetch(`http://localhost:3000/api/user/teacher/delete/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (req.status === 200) {
+                    alert("Lecturer Deleted");
+                    window.location.reload();
+                } else {
+                    alert("Error");
+                }
+            }
+        }
+
+        window.onload = async () => {
+            try {
+                const req = await fetch('http://localhost:3000/api/user/teacher/get');
+
+                if (req.status === 200) {
+                    const { teachers } = await req.json();
+
+                    console.log(teachers);
+
+                    for (let teacher of teachers) {
+                        const { _id, name, username, email } = teacher;
+
+                        const tr = document.createElement('tr');
+                        tr.innerHTML = `
+                            <td>${name}</td>
+                            <td>${username}</td>
+                            <td>${email}</td>
+                            <td>
+                                <button class="btn btn-primary" onclick="deleteTeacher('${_id}')"><i class="fa fa-trash"></i></button>
+                            </td>
+                        `;
+
+                        document.querySelector('#tblData tbody').appendChild(tr);
+                    }
+                }
+            } catch (e) {
+                console.log(e);
+            }
+        };
+    </script>
 </body>
 </html>

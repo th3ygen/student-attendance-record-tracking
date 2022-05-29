@@ -24,13 +24,10 @@
                 </form>
 
                 <form id="register" class="input-group" action="">
+                    <input id="name" name="name" type="text" class="input-field" placeholder="Name" required/>
                     <input id="username" name="username" type="text" class="input-field" placeholder="Username" required/>
                     <input id="useremail" name="useremail" type="email" class="input-field" placeholder="Email" required/>
                     <input id="userpass" name="userpass" type="password" class="input-field" placeholder="Password" required/>
-                    <select class="select-field" name="role" id="role">
-                        <option value="student">Student</option>
-                        <option value="lecturer">Lecturer</option>
-                    </select>
                     <br>
                     <br>
                     <button type="submit" class="submit-btn">Register</button>
@@ -39,6 +36,44 @@
             
         </div>
         <script>
+            async function userLogin(username, password) {
+                console.log(username, password);
+                const req = await fetch('http://localhost:3000/api/user/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password
+                    })
+                });
+
+                if (req.status === 200) {
+                    const {user} = await req.json();
+
+                    localStorage.setItem('user', JSON.stringify(user));
+                }
+            }
+
+            async function register(name, username, email, password) {
+
+            }
+
+            const loginForm = document.querySelector('#login');
+
+            loginForm.addEventListener('submit', e => {
+                e.preventDefault();
+
+                const username = document.querySelector('#username').value;
+                const userpass = document.querySelector('#userpass').value;
+
+                userLogin(username, userpass);
+
+                return true;
+            }) ;
+
+
             var x = document.getElementById("login");
             var y = document.getElementById("register");
             var z = document.getElementById("btn");

@@ -6,6 +6,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/student/get', controller.getStudents);
+router.delete('/student/delete/:id', controller.deleteStudent);
 
 router.post('/student/new', controller.newStudent);
 router.post('/add', controller.addClass);

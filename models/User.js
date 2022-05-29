@@ -43,27 +43,34 @@ userSchema.statics.register = function (name, email, username, password, role) {
     });
 }
 
-userSchema.statics.login = async function (name, password) {
-    const user = await this.findOne({ name });
+userSchema.statics.login = async function (username, password) {
+    const user = await this.findOne({ username });
 
     if (!user) {
         return null;
     }
-
+    
     // compare
     const isValid = await bcrypt.compare(password, user.password);
-
+    
     if (!isValid) {
         return null;
     }
-
-    const token = jwt.sign({
+    
+    const token = await jwt.sign({
         id: user._id,
         name: user.name,
+        username: user.username,
         role: user.role
     }, SECRET);
 
-    return token;
+    return {
+        id: user._id,
+        name: user.name,
+        username: user.username,
+        role: user.role,
+        token
+    };
 }
 
 const User = model('User', userSchema);

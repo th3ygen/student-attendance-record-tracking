@@ -38,6 +38,19 @@ module.exports = {
 			});
 		}
 	},
+	deleteStudent: async (req, res) => {
+		try {
+			const student = await _Student.findByIdAndDelete(req.params.id);
+
+			res.status(200).json({
+				message: "Student deleted",
+			});
+		} catch (e) {
+			res.status(500).json({
+				message: e.message,
+			});
+		}
+	},
 	getTotalEnrolled: async (req, res) => {
 		try {
 			const classess = await _Class.find({});
