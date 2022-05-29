@@ -5,10 +5,6 @@ const studentSchema = new Schema({
         type: String,
         required: true
     },
-    id: {
-        type: String,
-        required: true
-    },
     classEnrolled: [{
         type: Schema.Types.ObjectId,
         ref: 'Class'

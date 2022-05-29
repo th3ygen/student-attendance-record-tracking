@@ -105,11 +105,20 @@ module.exports = {
 	},
 	addClass: async (req, res) => {
 		try {
-			const { name, teacherId } = req.body;
+			const { name, maxStudent, teacherId, timeslots, students } = req.body;
 
 			const _class = new _Class({
-				name, teacherId
+				name, maxStudent, teacherId, timeslots
 			});
+
+			for (let student of students) {
+				const _student = await _Student.findById(student);
+
+				if (_student.classEnrolled.indexOf(_class._id) === -1) {
+					_student.classEnrolled.push(_class._id);		
+					await _student.save();
+				}
+			}
 
 			await _class.save();
 
@@ -122,5 +131,17 @@ module.exports = {
 			});
 		}
 	},
+	getClasses: async (req, res) => {
+		try {
+			const classes = await _Class.find({});
 
+			res.status(200).json({
+				classes,
+			});
+		} catch (e) {
+			res.status(500).json({
+				message: e.message,
+			});
+		}
+	}
 };

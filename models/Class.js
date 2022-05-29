@@ -5,6 +5,7 @@ const classSchema = new Schema({
         type: String,
         required: true
     },
+    maxStudent: Number,
     timeSlot: [{
         type: String
     }],

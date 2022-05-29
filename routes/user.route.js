@@ -6,6 +6,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/teacher/get', controller.getTeachers);
+
 router.delete('/teacher/delete/:id', controller.deleteTeacher);
 
 router.post('/login', controller.login);

@@ -132,144 +132,65 @@
 		<script type="module">
 			import { Grid, html } from "https://unpkg.com/gridjs?module";
 
-			new Grid({
-				columns: [
-					{
-						name: "Class name",
-						width: "40%",
-					},
-					{
-						name: "Slot time",
-						width: "20%",
-					},
-					{
-						name: "Total students",
-						width: "10%",
-					},
-					{
-						name: "Max student",
-						width: "10%",
-					},
-					{
-						name: "Action",
-						width: "20%",
-					},
-				],
-				data: [
-					[
-						"John",
-						"john@example.com",
-						"35",
-						"50",
-						html(
-							`<div class='actions'>
-                                <div class='action' onclick="location.href='./EditClass.html'" >
-                                    <i class='gg-pen'></i>
-                                </div>
-                                <div class='action' data-toggle='modal' data-target='#exampleModalCenter'>
-                                    <i class='gg-user-add'></i>
-                                </div><div class='action'>
-                                    <i class='gg-trash'></i>
-                                </div>
-                            </div>`
-						),
-					],
-					[
-						"John",
-						"john@example.com",
-						"35",
-						"50",
-						html(
-							"<div class='actions'><div class='action'><i class='gg-pen'></i></div><div class='action'><i class='gg-user-add'></i></div><div class='action'><i class='gg-trash'></i></div></div>"
-						),
-					],
-					[
-						"John",
-						"john@example.com",
-						"35",
-						"50",
-						html(
-							"<div class='actions'><div class='action'><i class='gg-pen'></i></div><div class='action'><i class='gg-user-add'></i></div><div class='action'><i class='gg-trash'></i></div></div>"
-						),
-					],
-					[
-						"John",
-						"john@example.com",
-						"35",
-						"50",
-						html(
-							"<div class='actions'><div class='action'><i class='gg-pen'></i></div><div class='action'><i class='gg-user-add'></i></div><div class='action'><i class='gg-trash'></i></div></div>"
-						),
-					],
-					[
-						"John",
-						"john@example.com",
-						"35",
-						"50",
-						html(
-							"<div class='actions'><div class='action'><i class='gg-pen'></i></div><div class='action'><i class='gg-user-add'></i></div><div class='action'><i class='gg-trash'></i></div></div>"
-						),
-					],
-					[
-						"John",
-						"john@example.com",
-						"35",
-						"50",
-						html(
-							"<div class='actions'><div class='action'><i class='gg-pen'></i></div><div class='action'><i class='gg-user-add'></i></div><div class='action'><i class='gg-trash'></i></div></div>"
-						),
-					],
-					[
-						"John",
-						"john@example.com",
-						"35",
-						"50",
-						html(
-							"<div class='actions'><div class='action'><i class='gg-pen'></i></div><div class='action'><i class='gg-user-add'></i></div><div class='action'><i class='gg-trash'></i></div></div>"
-						),
-					],
-				],
-			}).render(document.getElementById("table"));
+			window.onload = async () => {
+				let req = await fetch('http://localhost:3000/api/class/get');
+
+				if (req.status === 200) {
+					const { classes } = await req.json();
+
+					const data = [];
+					for (let _class of classes) {
+						data.push([
+							_class.name,
+							_class.timeSlot.join('\n'),
+							0,
+							_class.maxStudent,
+							html(
+								`<div class='actions'>
+									<div class='action' onclick="location.href='./EditClass.html'" >
+										<i class='gg-pen'></i>
+									</div>
+									<div class='action' data-toggle='modal' data-target='#exampleModalCenter'>
+										<i class='gg-user-add'></i>
+									</div><div class='action'>
+										<i class='gg-trash'></i>
+									</div>
+								</div>`
+							)
+						]);
+					}
+					
+					new Grid({
+						columns: [
+							{
+								name: "Class name",
+								width: "40%",
+							},
+							{
+								name: "Slot time",
+								width: "20%",
+							},
+							{
+								name: "Total students",
+								width: "10%",
+							},
+							{
+								name: "Max student",
+								width: "10%",
+							},
+							{
+								name: "Action",
+								width: "20%",
+							},
+						],
+						data
+					}).render(document.getElementById("table"));
+				}
+
+
+			};
+
 		</script>
 
-		<script type="module">
-			import { Grid, html } from "https://unpkg.com/gridjs?module";
-
-			new Grid({
-				columns: [
-					{
-						name: "Class name",
-						width: "40%",
-					},
-					{
-						name: "Slot time",
-						width: "20%",
-					},
-					{
-						name: "Total students",
-						width: "10%",
-					},
-					{
-						name: "Max student",
-						width: "10%",
-					},
-					{
-						name: "Action",
-						width: "20%",
-					},
-				],
-				data: [
-					[
-						"John",
-						"john@example.com",
-						"35",
-						"50",
-						html(
-							"<div class='actions'><div class='action'><i class='gg-pen'></i></div><div class='action'><i class='gg-user-add'></i></div><div class='action'><i class='gg-trash'></i></div></div>"
-						),
-					],
-				],
-			}).render(document.getElementById("wrapper"));
-		</script>
 	</body>
 </html>
