@@ -106,3 +106,12 @@
   background-color: #6161d4;
   color: white;
 }
+
+.header {
+  padding: 20px 10px;
+
+}
+
+.header > .title {
+  
+}
