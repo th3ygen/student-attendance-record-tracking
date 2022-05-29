@@ -37,7 +37,7 @@
 				<div class="noti"></div>
 				<div class="user">
 					<div class="photo"></div>
-					<div class="name">Lorem ipsum dolor sit amet</div>
+					<div class="name" id="name">Lorem ipsum dolor sit amet</div>
 				</div>
 			</div>
 		</div>
@@ -52,9 +52,9 @@
 				>
 					Add New Class
 				</button> -->
-                <a type="button" class="contButton"  href="./AddNewClass.html">
-                    Add New Class
-                </a>
+				<a type="button" class="contButton" href="./AddNewClass.html">
+					Add New Class
+				</a>
 			</div>
 
 			<div class="contTable">
@@ -88,15 +88,10 @@
 						</button>
 					</div>
 					<div class="modal-body">
-                        <div class="modalCont">
-                            <select name="student" id="">
-                                <option value="Nur Izzaty bt Ariffin">Nur Izzaty bt Ariffin</option>
-                                <option value="Muhammad Danial b. Mohammad Rizwan">Muhammad Danial b. Mohammad Rizwan</option>
-                                <option value="Muhammad Aidil Syazwan b. Hamdan">Muhammad Aidil Syazwan b. Hamdan</option>
-                            </select>
-                        </div>
-
-                    </div>
+						<div class="modalCont">
+							<select name="student" id="stdList"></select>
+						</div>
+					</div>
 					<div class="modal-footer">
 						<button
 							type="button"
@@ -105,7 +100,7 @@
 						>
 							Close
 						</button>
-						<button type="button" class="btn btn-primary">
+						<button id="addStdBtn" type="button" class="btn btn-primary">
 							Add Student
 						</button>
 					</div>
@@ -132,34 +127,120 @@
 		<script type="module">
 			import { Grid, html } from "https://unpkg.com/gridjs?module";
 
-			window.onload = async () => {
-				let req = await fetch('http://localhost:3000/api/class/get');
+			let activeClass = '';
 
+			try {
+				const user = JSON.parse(localStorage.getItem("user"));
+
+				document.querySelector("#name").innerHTML = user.name;
+			} catch (e) {
+				console.log(e);
+			}
+
+			async function addStudent() {
+				try {
+					const stdId = document.querySelector("#stdList").value;
+
+					const req = await fetch(
+						"http://localhost:3000/api/class/student/add",
+						{
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({
+								stdId,
+								classId: activeClass,
+							}),
+						}
+					);
+
+					if (req.status === 200) {
+						alert("Student Added");
+					} else {
+						alert("Something Went Wrong");
+					}
+				} catch (e) {
+					console.log(e);
+				}
+			}
+
+			async function deleteClass(classId) {
+				console.log(classId);
+				try {
+					const req = await fetch(
+						"http://localhost:3000/api/class/delete",
+						{
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({
+								classId
+							}),
+						}
+					);
+
+					if (req.status === 200) {
+						alert("Class Deleted");
+						window.location.reload();
+					} else {
+						alert("Something Went Wrong");
+					}
+				} catch (e) {
+					console.log(e);
+				}
+			}
+
+			window.onload = async () => {
+				document.querySelector('#addStdBtn').addEventListener('click', addStudent);
+
+				let req = await fetch("http://localhost:3000/api/class/get");
+				
 				if (req.status === 200) {
 					const { classes } = await req.json();
-
+					
+					const ids = []
 					const data = [];
-					for (let _class of classes) {
+					
+					for (let c of classes) {
 						data.push([
-							_class.name,
-							_class.timeSlot.join('\n'),
-							0,
-							_class.maxStudent,
+							c.class.name,
+							c.class.timeSlot.join("\n"),
+							c.total,
+							c.class.maxStudent,
 							html(
 								`<div class='actions'>
 									<div class='action' onclick="location.href='./EditClass.html'" >
 										<i class='gg-pen'></i>
 									</div>
-									<div class='action' data-toggle='modal' data-target='#exampleModalCenter'>
+									<div id="btn_${c.class._id}" class='action' data-toggle='modal' data-target='#exampleModalCenter'>
 										<i class='gg-user-add'></i>
-									</div><div class='action'>
+									</div><div id="del_${c.class._id}" class='action'>
 										<i class='gg-trash'></i>
 									</div>
 								</div>`
-							)
+							),
 						]);
+
+						ids.push(c.class._id);
 					}
-					
+
+					let stds = await fetch(
+						"http://localhost:3000/api/class/student/get"
+					);
+
+					if (stds.status === 200) {
+						const { students } = await stds.json();
+
+						let i = 0;
+						document.querySelector("#stdList").innerHTML = students
+							.map((std) => {
+								return `<option value="${std._id}" ${(i === 0 && 'selected')}>${std.name}</option>`;
+							})
+							.join("");
+					}
+
 					new Grid({
 						columns: [
 							{
@@ -183,14 +264,22 @@
 								width: "20%",
 							},
 						],
-						data
+						data,
 					}).render(document.getElementById("table"));
+
+					setTimeout(() => {
+						for (let id of ids) {
+							document.querySelector(`#btn_${id}`).addEventListener('click', () => {
+								activeClass = id;
+							});
+							document.querySelector(`#del_${id}`).addEventListener('click', () => {
+								deleteClass(id);
+							});
+						}
+
+					}, 0);
 				}
-
-
 			};
-
 		</script>
-
 	</body>
 </html>

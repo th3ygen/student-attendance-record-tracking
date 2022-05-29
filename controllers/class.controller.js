@@ -51,6 +51,23 @@ module.exports = {
 			});
 		}
 	},
+	deleteClass: async (req, res) => {
+		try {
+			const classId = req.body.classId;
+
+			console.log(classId);
+
+			await _Class.findByIdAndDelete(classId);
+
+			res.status(200).json({
+				message: "Class deleted",
+			});
+		} catch (e) {
+			res.status(500).json({
+				message: e.message,
+			});
+		}
+	},
 	getTotalEnrolled: async (req, res) => {
 		try {
 			const classess = await _Class.find({});
@@ -87,6 +104,22 @@ module.exports = {
 			if (!_class) {
 				return res.status(404).json({
 					message: "Class not found",
+				});
+			}
+
+			const total = await _Student.find({
+				classEnrolled: _class._id
+			}).countDocuments();
+
+			if (total >= _class.maxStudents) {
+				return res.status(400).json({
+					message: "Class is full",
+				});
+			}
+
+			if (student.classEnrolled.includes(classId)) {
+				return res.status(400).json({
+					message: "Student already enrolled",
 				});
 			}
 
@@ -135,8 +168,21 @@ module.exports = {
 		try {
 			const classes = await _Class.find({});
 
+			const result = [];
+			for (let _class of classes) {
+				// find total students who have classEnrolled = _class._id
+				const total = await _Student.find({
+					classEnrolled: _class._id
+				}).countDocuments();
+
+				result.push({
+					class: _class,
+					total
+				});
+			}
+
 			res.status(200).json({
-				classes,
+				classes: result
 			});
 		} catch (e) {
 			res.status(500).json({
