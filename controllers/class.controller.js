@@ -55,7 +55,14 @@ module.exports = {
 		try {
 			const classId = req.body.classId;
 
-			console.log(classId);
+			const students = await _Student.find({ 
+				classEnrolled: classId,
+			});
+
+			for (let student of students) {
+				student.classEnrolled.splice(student.classEnrolled.indexOf(classId), 1);
+				await student.save();
+			}
 
 			await _Class.findByIdAndDelete(classId);
 
@@ -141,7 +148,7 @@ module.exports = {
 			const { name, maxStudent, teacherId, timeslots, students } = req.body;
 
 			const _class = new _Class({
-				name, maxStudent, teacherId, timeslots
+				name, maxStudent, teacherId, timeSlot: timeslots
 			});
 
 			for (let student of students) {
@@ -157,6 +164,54 @@ module.exports = {
 
 			res.status(200).json({
 				class: _class
+			});
+		} catch (e) {
+			res.status(500).json({
+				message: e.message,
+			});
+		}
+	},
+	editClass: async (req, res) => {
+		try {
+			const { name, maxStudent, teacherId, timeslots, students } = req.body;
+
+			const _class = await _Class.findById(req.params.id);
+
+			if (!_class) {
+				return res.status(404).json({
+					message: "Class not found",
+				});
+			}
+
+			
+			_class.name = name;
+			_class.maxStudents = maxStudent;
+			_class.teacherId = teacherId;
+			_class.timeSlot = timeslots;
+			
+			const stds = await _Student.find({
+				classEnrolled: _class._id
+			});
+
+			for (let student of stds) {
+				student.classEnrolled.splice(student.classEnrolled.indexOf(_class._id), 1);
+				
+				await student.save();
+			}
+
+			for (let student of students) {
+				const _student = await _Student.findById(student);
+
+				if (_student.classEnrolled.indexOf(_class._id) === -1) {
+					_student.classEnrolled.push(_class._id);		
+					await _student.save();
+				}
+			}
+
+			await _class.save();
+
+			res.status(200).json({
+				message: "Class updated",
 			});
 		} catch (e) {
 			res.status(500).json({

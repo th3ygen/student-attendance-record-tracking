@@ -32,7 +32,7 @@
 		<div class="topbar">
 			<div class="logo"></div>
 			<nav class="nav">
-				<a href="#" class="active">Class</a>
+				<a href="ManageClass.html" class="active">Class</a>
 				<a href="Attendance.html">Attendance</a>
 				<a href="Report.html">Report</a>
 				<a href="Notification.html">Notification</a>
@@ -192,6 +192,7 @@
 			}
 
 			async function submit() {
+				const classId = localStorage.getItem("classId");
 				const user = JSON.parse(localStorage.getItem("user"));
 
 				const name = document.querySelector("#className").value;
@@ -204,8 +205,8 @@
 					.map((key) => stds[key].id);
 
                 console.log(students);
-/* 
-				const req = await fetch("http://localhost:3000/api/class/add", {
+
+				const req = await fetch(`http://localhost:3000/api/class/edit/${classId}`, {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
@@ -220,10 +221,11 @@
 				});
 
 				if (req.status === 200) {
-					alert("Class added successfully");
+					alert("Class update successfully");
+					window.location.href = "ManageClass.html";
 				} else {
 					alert("Something went wrong");
-				} */
+				}
 			}
 
 			window.onload = async () => {

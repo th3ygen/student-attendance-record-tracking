@@ -19,7 +19,6 @@ const notiSchema = new Schema({
     classId: {
         type: Schema.Types.ObjectId,
         ref: 'Class',
-        required: true
     }
 });
 

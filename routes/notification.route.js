@@ -7,4 +7,6 @@ router.get('/', (req, res) => {
 
 router.get('/get', controller.getNotifications)
 
+router.post('/new', controller.pushNotification)
+
 module.exports = router;

@@ -83,7 +83,7 @@ async function submit() {
 
     if (req.status === 200) {
         alert("Class added successfully");
-        /* window.location.href = "./class.html"; */
+        window.location.href = "./ManageClass.html";
     } else {
         alert("Something went wrong");
     }

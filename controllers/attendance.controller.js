@@ -6,8 +6,26 @@ const _Student = require('../models/Student');
 module.exports = {
     mark: async (req, res) => {
         try {
-            const { studentId, date, status }
-        }
+            const { studentId, date, status, datetime, timeslot } = req.body;
+
+			const attendance = new _Attendance({
+				studentId,
+				date,
+				status,
+				datetime,
+				timeslot,
+			});
+
+			await attendance.save();
+
+			res.json({
+				attendance,
+			});
+        } catch (e) {
+			res.status(500).json({
+				message: e.message,
+			});
+		}
     },
     getTotalAttend: async (req, res) => {
 		try {

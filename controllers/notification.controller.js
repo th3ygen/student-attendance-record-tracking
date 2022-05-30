@@ -10,7 +10,8 @@ module.exports = {
             const notification = new _Notification({
                 title,
                 content,
-                type,
+                type,    
+                status: 'unread',
             });
 
             await notification.save();

@@ -14,6 +14,7 @@ router.post('/student/add', controller.addStudent);
 router.get('/get', controller.getClasses);
 router.get('/:id', controller.getClass);
 router.post('/add', controller.addClass);
+router.post('/edit/:id', controller.editClass);
 
 router.post('/delete', controller.deleteClass);
 

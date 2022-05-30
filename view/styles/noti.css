@@ -6,6 +6,14 @@
 	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.heading {
+	display: flex;
+	width: 100%;
+
+	justify-content: space-between;
+	
+	margin-top: 50px;
+}
 
 .wrapper{
 	position: absolute;
@@ -38,4 +46,68 @@
 	background-color: #4480ae;
 	color: #fff;
 }
+
+.button {
+	background: #313715;
+
+	color: white;
+
+	display: flex;
+	align-items: center;
+
+	gap: 10px;
+
+	padding: 10px 25px;
+
+	border-radius: 8px;
+
+	cursor: pointer;
+
+	transition: .3s all;
+}
+
+.button:hover {
+	background: #798643;
+}
+
+.noti-actions {
+	display: flex;
+	gap: 15px;
+
+	align-items: center;
+
+	width: 100%;
+
+	justify-content: flex-end;
+
+	padding: 20px 30px;
+
+	font-size: 14px;
+}
+
+.noti-actions .action {
+	width: 35px;
+	height: 35px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	border-radius: 50%;
+
+	background: #313715;
+
+	cursor: pointer;
+
+	color: white;
+
+	opacity: .7;
+
+	transition: .3s all;
+}
+
+.noti-actions .action:hover {
+	opacity: 1;
+}
+
 

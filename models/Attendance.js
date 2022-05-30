@@ -19,4 +19,4 @@ const recSchema = new Schema({
     remarks: String
 });
 
-module.exports = model('AttendanceRecord', recSchema);
+module.exports = model('AttendanceRecord', recSchema); 
