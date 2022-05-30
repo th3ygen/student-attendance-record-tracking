@@ -1,6 +1,6 @@
 const _Class = require("../models/Class");
 const _Attendance = require("../models/Attendance");
-const _AttendanceRecord = require("../models/AttendanceRecord");
+const _AttendanceRecord = require("../models/Attendance");
 const _Student = require('../models/Student');
 
 module.exports = {
@@ -86,7 +86,7 @@ module.exports = {
 	},
     getAttendanceRateGrouped: async (req, res) => {
         try {
-            const classes = await _Class.find({);
+            const classes = await _Class.find({});
 
             let result = [];
 

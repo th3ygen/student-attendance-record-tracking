@@ -1,5 +1,5 @@
 const _Attendance = require('../models/Attendance');
-const _AttendanceRecord = require('../models/AttendanceRecord');
+const _AttendanceRecord = require('../models/Attendance');
 const _Notification = require('../models/Notification');
 
 const MAX_ABSENT = 3;

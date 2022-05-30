@@ -1,23 +1,22 @@
 const { Schema, model } = require('mongoose');
 
-const attendanceSchema = new Schema({
-    date: {
-        type: Date,
+const recSchema = new Schema({
+    studentId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Student',
         required: true
     },
     classId: {
         type: Schema.Types.ObjectId,
         ref: 'Class',
-        required: true
     },
-    dueDate: {
-        type: Date,
-        required: true
+    datetime: Date,
+    timeslot: String,
+    status: {
+        type: String,
+        enum: ['present', 'absent', 'on medical leave'],
     },
-}, {
-    timestamps: true
+    remarks: String
 });
 
-const Attendance = model('Attendance', attendanceSchema);
-
-module.exports = Attendance;
+module.exports = model('AttendanceRecord', recSchema);

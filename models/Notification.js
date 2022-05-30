@@ -10,11 +10,11 @@ const notiSchema = new Schema({
     },
     status: {
         type: String,
-        enum: ['unread', 'read'],
+        enum: ['unread', 'read', 'bin'],
     },
     type: {
         type: String,
-        enum: ['general', 'class', 'attendance'],
+        enum: ['general', 'class', 'attendance', 'reset'],
     },
     classId: {
         type: Schema.Types.ObjectId,
