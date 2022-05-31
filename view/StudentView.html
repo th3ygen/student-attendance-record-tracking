@@ -45,25 +45,19 @@
         <section class="dashboard">
             <div class="dash-content">
                 <div class="overview">
-                    <div class="title">
-                        <i class="uil uil-book-reader"></i>
-                        <span class="text">Students</span>
-                    </div>
-    
-        <form action="student_view.php" method="POST">
-            <div>
-                <div class="search">
-                    <input type="text" class="searchTerm" name="valueToSearch"  placeholder="Search for Student Name ...">
-                    <button class="searchButton" type="submit" name="search_btn" value="Search"><i class="fa fa-search"></i></button> 
-                </div>
+                    
+        <div class="contentHead">
+            <div class="title">
+                <i class="uil uil-book-reader"></i>
+                <span class="text">Students</span>
             </div>
-        </form>
-        <br>
-        <div class="cont">
-            <button><a href="AddStudent.html" title="Add New Student">
-            <i class="fa fa-plus" aria-hidden="true"></i> Add New Student
-            </a></button>
+            <div class="cont">
+                <button><a href="AddStudent.html" title="Add New Student">
+                <i class="fa fa-plus" aria-hidden="true"></i> Add New Student
+                </a></button>
+            </div>
         </div>
+        
         <table class="table table-striped table-condensed" id="tblData">
             <thead>
             <tr>

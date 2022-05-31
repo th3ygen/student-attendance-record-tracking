@@ -15,7 +15,6 @@
 .dash-content .title{
     display: flex;
     align-items: center;
-    margin: 60px 0 30px 0;
 }
 .dash-content .title i{
     position: relative;
@@ -191,6 +190,15 @@ table {
     width:100%;
     transition:800ms ease all;
   }
+
+  .contentHead {
+    padding: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+  }
+
   .cont a {
     color: #000000;
     text-decoration: none;
