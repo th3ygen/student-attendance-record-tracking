@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attendance</title>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Attendance</title>
 
-    <link
+		<link
 			href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
 			rel="stylesheet"
 		/>
@@ -16,66 +16,108 @@
 		<link rel="stylesheet" href="../styles/global.css" />
 		<link rel="stylesheet" href="../styles/class.css" />
 		<link rel="stylesheet" href="../styles/attendance.css" />
+	</head>
+	<body>
+		<div class="topbar">
+			<div class="logo"></div>
+			<nav class="nav">
+				<a href="ManageClass.html">Class</a>
+				<a href="Attendance.html" class="active">Attendance</a>
+				<a href="Report.html">Report</a>
+			</nav>
+			<div class="settings">
+				<button
+					id="notinav"
+					type="button"
+					class="noti btn btn-primary position-relative"
+				>
+					<i class="fa-solid fa-bell"></i>
+					<span
+						class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+					>
+						99+
+					</span>
+				</button>
+				<div class="user">
+					<div class="photo">
+						<i class="fa-solid fa-user"></i>
+					</div>
+					<div class="name" id="name">Lorem ipsum dolor sit amet</div>
+				</div>
+			</div>
+		</div>
+		<div class="mcontainer">
+			<div class="header">
+				<div class="title">Attendance</div>
+				<div class="actions">
+					<div class="btn-add" id="btn">Record Attendance</div>
+				</div>
+			</div>
+			<div id="table"></div>
+		</div>
+		<script src="../js/global.js"></script>
+		<script type="module">
+			import { Grid, html } from "https://unpkg.com/gridjs?module";
 
-</head>
-<body>
-    <div class="topbar">
-        <div class="logo"></div>
-        <nav class="nav">
-          <a href="ManageClass.html">Class</a>
-          <a href="#" class="active">Attendance</a>
-          <a href="Report.html">Report</a>
-          <a href="Notification.html">Notification</a>
-        </nav>
-        <div class="settings">
-            <div class="noti"></div>
-            <div class="user">
-                <div class="photo"></div>
-                <div class="name">Lorem ipsum dolor sit amet</div>
-            </div>
-        </div>
-    </div>
-    <div class="mcontainer">
-      <div class="header">
-        <div class="title"></div>
-        <div class="actions">
-          <div class="btn-add">
-            Add Attendance
-          </div>
-        </div>
-      </div>
-      <div id="table"></div>
-    </div>
-  </div>
-  
-  <script type="module">
-    import { Grid, html } from "https://unpkg.com/gridjs?module";
+			window.onload = async () => {
+				const req = await fetch(
+					"http://localhost:3000/api/attendance/get"
+				);
 
-    new Grid({
-						columns: [
-							{
-								name: "Class name",
-								width: "40%",
-							},
-							{
-								name: "Slot time",
-								width: "20%",
-							},
-							{
-								name: "Total students",
-								width: "10%",
-							},
-							{
-								name: "Max student",
-								width: "10%",
-							},
-							{
-								name: "Action",
-								width: "20%",
-							},
-						],
-						data: [],
-					}).render(document.getElementById("table"));
-  </script>
-</body>
+				const data = [];
+				if (req.status === 200) {
+					const { attendances } = await req.json();
+
+					for (let att of attendances) {
+						data.push([
+							att.className,
+							att.date,
+							att.rate + "%",
+							att.total,
+							html(
+								`<div class='actions'>
+									<div id="edit_${att.className}" class='action' onclick="location.href='./EditClass.html'" >
+										<i class='gg-pen'></i>
+									</div><div id="del_${att.className}" class='action'>
+										<i class='gg-trash'></i>
+									</div>
+								</div>`
+							),
+						]);
+					}
+				}
+
+				new Grid({
+					columns: [
+						{
+							name: "Class name",
+							width: "40%",
+						},
+						{
+							name: "Date",
+							width: "20%",
+						},
+						{
+							name: "Attendance rate",
+							width: "10%",
+						},
+						{
+							name: "Total students",
+							width: "10%",
+						},
+						{
+							name: "Action",
+							width: "20%",
+						},
+					],
+					data,
+				}).render(document.getElementById("table"));
+			};
+
+			const btn = document.getElementById("btn");
+			btn.addEventListener("click", () => {
+				window.location.href = "RecordAttendance.html";
+			});
+		</script>
+	</body>
 </html>

@@ -26,14 +26,20 @@
 			<nav class="nav">
 				<a href="ManageClass.html">Class</a>
 				<a href="Attendance.html">Attendance</a>
-				<a href="#" class="active">Report</a>
-                <a href="Notification.html">Notification</a>
+				<a href="Report.html" class="active">Report</a>
 			</nav>
 			<div class="settings">
-				<div class="noti"></div>
+				<button id="notinav" type="button" class="noti btn btn-primary position-relative">
+					<i class="fa-solid fa-bell"></i>
+					<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+					  99+
+					</span>
+				  </button>
 				<div class="user">
-					<div class="photo"></div>
-					<div class="name">Lorem ipsum dolor sit amet</div>
+					<div class="photo">
+						<i class="fa-solid fa-user"></i>
+					</div>
+					<div class="name" id="name">Lorem ipsum dolor sit amet</div>
 				</div>
 			</div>
 		</div>
@@ -47,7 +53,7 @@
                 attendance rate
                 attendance completeness
 
-                absense list
+                absent list
              -->
 			<div class="report">
 				<div class="main">
@@ -98,7 +104,7 @@
                         <div id="table1"></div>
                     </div>
                     <div class="item">
-                        <div class="title">Absense students</div>
+                        <div class="title">Absent students</div>
                         <div id="table2"></div>
                     </div>
                 </div>
@@ -108,7 +114,7 @@
 		<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
 		<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
 		<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-
+		<script src="../js/global.js"></script>
 		<script>
 			const chart1 = am5.Root.new("chart1");
 
@@ -148,31 +154,25 @@
 
 			// Generate random data
 			function generateChartData() {
-				let chartData = [];
-				// current date
-				let firstDate = new Date();
-				// now set 500 minutes back
-				firstDate.setMinutes(firstDate.getDate() - 500, 0, 0);
+				const chartData = [];
+				const firstDate = new Date();
+				firstDate.setDate(firstDate.getDate() - 100);
+				firstDate.setHours(0, 0, 0, 0);
 
-				// and generate 500 data items
-				let visits = 500;
-				for (let i = 0; i < 500; i++) {
-					let newDate = new Date(firstDate);
-					// each time we add one minute
-					newDate.setMinutes(newDate.getMinutes() + i);
-					// some random number
-					visits += Math.round(
-						(Math.random() < 0.5 ? 1 : -1) * Math.random() * 10
-					);
-					// add data item to the array
+				for (let i = 0; i < 100; i++) {
+					const newDate = new Date(firstDate);
+					newDate.setDate(newDate.getDate() + i);
+
 					chartData.push({
 						date: newDate.getTime(),
-						visits: visits,
+						visits: Math.round(Math.random() * 100),
 					});
 				}
 				return chartData;
 			}
 			const data = generateChartData();
+
+			console.log(data);
 
 			// Create series
 			const series = attRateChart.series.push(
@@ -302,16 +302,12 @@
 						"Class A",
 					],
 					[
-						"Muhammad Aidil Syazwan bin Hamdan",
-						"Class A",
+						"Nur Izzaty binti Ariffin",
+						"Class C",
 					],
 					[
-						"Muhammad Aidil Syazwan bin Hamdan",
-						"Class A",
-					],
-					[
-						"Muhammad Aidil Syazwan bin Hamdan",
-						"Class A",
+						"Muhammad Danial bin Mohamad Rizwan",
+						"Class D",
 					],
 				],
 			}).render(document.getElementById("table2"));

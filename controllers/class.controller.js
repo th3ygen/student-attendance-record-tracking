@@ -38,6 +38,24 @@ module.exports = {
 			});
 		}
 	},
+	getStudentsByClassId: async (req, res) => {
+		try {
+			const classId = req.params.id;
+
+			const students = await _Student.find({
+				classEnrolled: classId,
+			});
+
+			res.status(200).json({
+				students,
+			});
+
+		} catch (e) {
+			res.status(500).json({
+				message: e.message,
+			});
+		}
+	},
 	deleteStudent: async (req, res) => {
 		try {
 			const student = await _Student.findByIdAndDelete(req.params.id);
@@ -96,9 +114,7 @@ module.exports = {
 		try {
 			const { stdId, classId } = req.body;
 
-			const student = await _Student.findOne({
-				id: stdId
-			});
+			const student = await _Student.findById(stdId);
 
 			if (!student) {
 				return res.status(404).json({

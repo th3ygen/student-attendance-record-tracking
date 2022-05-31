@@ -23,6 +23,8 @@ body {
 
     display: flex;
     justify-content: space-between;
+
+    z-index: 999;
 }
 
 .logo {
@@ -67,11 +69,11 @@ body {
 }
 
 .nav a:hover {
-    color: gold;
+    color: #009480;
 }
 
 .nav a.active {
-    border-bottom: 3px solid gold;
+    border-bottom: 3px solid #009480;
 }
 
 .settings {
@@ -88,10 +90,9 @@ body {
 }
 
 .settings .noti {
-    background: gold;
+    color: white;
 
-    height: 30px;
-    width: 30px;
+    background: #009480;
 }
 
 .settings .user {
@@ -105,12 +106,19 @@ body {
 }
 
 .settings .photo {
-    background: gold;
+    background: #009480;
 
     height: 60px;
     width: 60px;
 
     border-radius: 50%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    color: white;
 }
 
 .mcontainer {

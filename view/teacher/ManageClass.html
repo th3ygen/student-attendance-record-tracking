@@ -20,6 +20,8 @@
 			crossorigin="anonymous"
 		/>
 
+		<script src="https://kit.fontawesome.com/646cc00c51.js" crossorigin="anonymous"></script>
+
 		<link rel="stylesheet" href="../styles/global.css" />
 		<link rel="stylesheet" href="../styles/class.css" />
 	</head>
@@ -28,15 +30,21 @@
 		<div class="topbar">
 			<div class="logo"></div>
 			<nav class="nav">
-				<a href="#" class="active">Class</a>
+				<a href="ManageClass.html" class="active">Class</a>
 				<a href="Attendance.html">Attendance</a>
 				<a href="Report.html">Report</a>
-				<a href="Notification.html">Notification</a>
 			</nav>
 			<div class="settings">
-				<div class="noti"></div>
+				<button id="notinav" type="button" class="noti btn btn-primary position-relative">
+					<i class="fa-solid fa-bell"></i>
+					<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+					  99+
+					</span>
+				  </button>
 				<div class="user">
-					<div class="photo"></div>
+					<div class="photo">
+						<i class="fa-solid fa-user"></i>
+					</div>
 					<div class="name" id="name">Lorem ipsum dolor sit amet</div>
 				</div>
 			</div>
@@ -124,6 +132,8 @@
 			crossorigin="anonymous"
 		></script>
 
+		<script src="../js/global.js"></script>
+
 		<script type="module">
 			import { Grid, html } from "https://unpkg.com/gridjs?module";
 
@@ -141,6 +151,8 @@
 				try {
 					const stdId = document.querySelector("#stdList").value;
 
+					console.log(stdId);
+
 					const req = await fetch(
 						"http://localhost:3000/api/class/student/add",
 						{
@@ -157,6 +169,7 @@
 
 					if (req.status === 200) {
 						alert("Student Added");
+						location.reload();
 					} else {
 						alert("Something Went Wrong");
 					}
@@ -236,7 +249,7 @@
 						let i = 0;
 						document.querySelector("#stdList").innerHTML = students
 							.map((std) => {
-								return `<option value="${std._id}" ${(i === 0 && 'selected')}>${std.name}</option>`;
+								return `<option value="${std._id}" ${(i++ === 0 && 'selected' || '')}>${std.name}</option>`;
 							})
 							.join("");
 					}

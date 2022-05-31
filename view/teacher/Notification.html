@@ -32,15 +32,22 @@
 				<a href="ManageClass.html">Class</a>
 				<a href="Attendance.html">Attendance</a>
 				<a href="Report.html">Report</a>
-				<a href="Notification.html" class="active">Notification</a>
 			</nav>
 			<div class="settings">
-				<div class="noti"></div>
+				<button id="notinav" type="button" class="noti btn btn-primary position-relative">
+					<i class="fa-solid fa-bell"></i>
+					<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+					  99+
+					</span>
+				  </button>
 				<div class="user">
-					<div class="photo"></div>
-					<div class="name" id="name">Lecturer : Ayuni Baiduri</div>
+					<div class="photo">
+						<i class="fa-solid fa-user"></i>
+					</div>
+					<div class="name" id="name">Lorem ipsum dolor sit amet</div>
 				</div>
 			</div>
+		</div>>
 		</div>
 		<div class="mcontainer" style="padding-top: 130px">
 			<div class="heading">
@@ -58,7 +65,7 @@
 			</div>
 
 			<div class="accordion accordion-flush" id="accordionFlushExample">
-				<div class="accordion-item">
+				<div class="accordion-item ">
 					<h2 class="accordion-header" id="flush-headingOne">
 						<button
 							class="accordion-button collapsed"
@@ -68,7 +75,7 @@
 							aria-expanded="false"
 							aria-controls="flush-collapseOne"
 						>
-							Accordion Item #1
+							Student 'Muhammad Aidil Syazwan bin Hamdan' was absent for the 3rd times today
 						</button>
 					</h2>
 					<div
@@ -84,10 +91,7 @@
 							</div>
 						</div>
 						<div class="accordion-body">
-							Placeholder content for this accordion, which is
-							intended to demonstrate the
-							<code>.accordion-flush</code> class. This is the
-							first item's accordion body.
+							Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet repellat laborum labore eius magni totam maxime autem quos nemo atque pariatur velit tenetur fugiat debitis eveniet ipsa voluptas qui quibusdam, maiores laudantium unde deserunt recusandae voluptate aliquam. Excepturi dolor ea hic unde dolores reprehenderit, exercitationem quam dolorem! Esse minus laborum, odit at eos facilis, dolorem soluta harum illum, nulla debitis explicabo? Minima est itaque, nisi quam maiores animi, non, cum consectetur earum corporis ad aspernatur nulla deleniti qui. Quidem odit, veritatis perspiciatis modi quis provident eaque? Amet dolorem magnam repellendus similique excepturi corrupti vitae dicta libero ex quo. Eos, totam.
 						</div>
 					</div>
 				</div>
@@ -99,7 +103,7 @@
 			integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
 			crossorigin="anonymous"
 		></script>
-
+		<script src="../js/global.js"></script>
 		<script>
 			try {
 				const user = JSON.parse(localStorage.getItem("user"));

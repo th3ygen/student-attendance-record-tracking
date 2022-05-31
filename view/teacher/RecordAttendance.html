@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Layout</title>
+
+		<link
+			href="https://unpkg.com/gridjs/dist/theme/mermaid.min.css"
+			rel="stylesheet"
+		/>
+		<!-- UNPKG -->
+		<link href="https://unpkg.com/css.gg/icons/all.css" rel="stylesheet" />
+
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+			crossorigin="anonymous"
+		/>
+
+		<link rel="stylesheet" href="../styles/global.css" />
+		<link rel="stylesheet" href="../styles/class.css" />
+		<link rel="stylesheet" href="../styles/attendance.css" />
+		<link rel="stylesheet" href="../styles/recordAttendance.css" />
+	</head>
+
+	<body>
+		<div class="topbar">
+			<div class="logo"></div>
+			<nav class="nav">
+				<a href="ManageClass.html">Class</a>
+				<a href="Attendance.html" class="active">Attendance</a>
+				<a href="Report.html">Report</a>
+			</nav>
+			<div class="settings">
+				<button id="notinav" type="button" class="noti btn btn-primary position-relative">
+					<i class="fa-solid fa-bell"></i>
+					<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+					  99+
+					</span>
+				  </button>
+				<div class="user">
+					<div class="photo">
+						<i class="fa-solid fa-user"></i>
+					</div>
+					<div class="name" id="name">Lorem ipsum dolor sit amet</div>
+				</div>
+			</div>
+		</div>
+		<div class="mcontainer">
+			<div class="header">
+				<div class="title">Add attendance</div>
+			</div>
+
+			<div class="wrapper">
+				<form id="form">
+					<div class="item" style="flex: 0 0 100%">
+						<div class="label">Class name</div>
+						<div class="input">
+							<select class="listForm" id="classList"></select>
+						</div>
+					</div>
+					<div class="item" style="flex: 1 40%">
+						<div class="label">Date</div>
+						<div class="input">
+							<input
+								class="listForm"
+								style="padding: 6px 20px !important"
+								type="date"
+								name=""
+								id="date"
+							/>
+						</div>
+					</div>
+					<div class="item" style="flex: 1 1 40%">
+						<div class="label">Timeslot</div>
+						<div class="input">
+							<select class="listForm" id="timeslot">
+								<option value="08.00am-10.00am">
+									08.00am-10.00am
+								</option>
+								<option value="10.00am-12.00pm">
+									10.00am-12.00pm
+								</option>
+								<option value="12.00pm-02.00pm">
+									12.00pm-02.00pm
+								</option>
+								<option value="02.00pm-04.00pm">
+									02.00pm-04.00pm
+								</option>
+								<option value="04.00pm-06.00pm">
+									04.00pm-06.00pm
+								</option>
+								<option value="08.00pm-10.00pm">
+									08.00pm-10.00pm
+								</option>
+							</select>
+						</div>
+					</div>
+
+					<div class="item students" style="flex: 0 0 100%">
+						<div class="label">Record attendance</div>
+						<div class="table" id="studentsTable"></div>
+					</div>
+
+					<div class="item attActions" style="flex: 0 0 100%">
+						<button type="submit" class="button">Submit</button>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<script
+			src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+			integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+			crossorigin="anonymous"
+		></script>
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+			crossorigin="anonymous"
+		></script>
+		<script src="../js/global.js"></script>
+		<script>
+			let record = [];
+
+			async function save() {
+				const classId = document.querySelector('#classList').value;
+				const date = document.querySelector('#date').value;
+				const timeslot = document.querySelector('#timeslot').value;
+
+				const data = record.map(d => ({
+					studentId: d._id, 
+					status: d.status
+				}))
+
+				try {
+					const req = await fetch('http://localhost:3000/api/attendance/add', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({
+							classId,
+							date,
+							timeslot,
+							list: data
+						})
+					});
+
+					if (req.status === 200) {
+						const res = await req.json();
+						console.log(res);
+
+						alert('added')
+						window.location.href = 'Attendance.html';
+					} else {
+						alert('failed')
+					}
+
+				} catch (e) {
+					console.log(e);
+				}
+			}
+
+			function appendStudent(name, id) {
+				return `
+					<div class="item">
+						<div class="name">
+							${name}
+						</div>
+						<div class="recActions" data-id="${id}">
+							<div class="action" style="background: rgb(248, 61, 61)">
+								<i class='gg-user-add'></i>
+							</div>
+							<div class="action">
+								Absent
+							</div>
+							<div class="action active">
+								<i class="gg-check"></i> Attend
+							</div>
+						</div>
+					</div>
+				`;
+			}
+
+			async function loadStudents(classId) {
+				const req = await fetch(
+					`http://localhost:3000/api/class/${classId}/students`
+				);
+
+				if (req.status === 200) {
+					const {students} = await req.json();
+
+					for (let student of students) {
+						studentsTable.innerHTML += appendStudent(
+							student.name,
+							student._id
+						);
+
+						student.status = 'attend';
+					}
+					record = students;
+				} else {
+					console.log(req);
+				}
+			}
+
+			window.onload = async () => {
+				document.querySelector('#form').addEventListener('submit', (e) => {
+					e.preventDefault();
+					save();
+					return false;
+				});
+
+				const classList = document.querySelector("#classList");
+				const studentsTable = document.querySelector("#studentsTable");
+
+				classList.addEventListener("change", async (e) => {
+					studentsTable.innerHTML = "";
+					loadStudents(e.target.value);
+				});
+				try {
+					let req = await fetch(
+						"http://localhost:3000/api/class/get"
+					);
+
+					if (req.status === 200) {
+						const { classes } = await req.json();
+
+						for (let c of classes) {
+							classList.innerHTML += `
+								<option value='${c.class._id}'>${c.class.name}</option>
+							`;
+						}
+
+						loadStudents(classes[0].class._id);
+					} else {
+						console.log(req);
+					}
+				} catch (e) {
+					console.log(e);
+				}
+
+				setTimeout(() => {
+					document.querySelectorAll('.recActions .action').forEach(e => {
+						e.addEventListener('click', (e) => {
+							let status = e.target.innerHTML;
+							const elem = e.target.parentElement;
+							const id = elem.dataset.id;
+
+							let s = status.split('>');
+
+							if (s.length > 1) {
+								status = s[2].replace(/[^a-zA-Z ]/g, "");
+							} else {
+								status = s[0].replace(/[^a-zA-Z ]/g, "");
+							}
+
+							// remove whitespace
+							status = status.trim().toLowerCase();
+							
+							// edit record
+							for (let i = 0; i < record.length; i++) {
+								if (record[i]._id === id) {
+									record[i].status = status;
+									break;
+								}
+							}
+
+							const act = elem.querySelectorAll('div');
+							if (status === 'absent') {
+								act[1].classList.add('active');
+								act[2].classList.remove('active');
+
+								act[1].innerHTML = '<i class="gg-check"></i> Absent';
+								act[2].innerHTML = 'Attend';
+								
+							} else {
+								act[1].classList.remove('active');
+								act[2].classList.add('active');
+
+								act[1].innerHTML = 'Absent';
+								act[2].innerHTML = '<i class="gg-check"></i> Attend';
+							}
+						});
+					});
+
+				}, 100);
+			};
+		</script>
+	</body>
+</html>

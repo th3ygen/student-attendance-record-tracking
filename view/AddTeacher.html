@@ -21,17 +21,22 @@
 		<div class="topbar">
 			<div class="logo"></div>
 			<nav class="nav">
-				<a href="admin_dashboard.html">Dashboard</a>
-				<a href="student_view.html">Student</a>
-				<a href="lecturer_view.html" class="active">Lecturer</a>
-				<a href="ManageClass.html">Class</a>
-				<a href="Report.html">Report</a>
+				<a href="StudentView.html">Student</a>
+				<a href="TeacherView.html" class="active">Teacher</a>
+				<a href="/teacher/ManageClass.html">Class</a>
 			</nav>
 			<div class="settings">
-				<div class="noti"></div>
+				<button id="notinav" type="button" class="noti btn btn-primary position-relative">
+					<i class="fa-solid fa-bell"></i>
+					<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+					  99+
+					</span>
+				  </button>
 				<div class="user">
-					<div class="photo"></div>
-					<div class="name">Lorem ipsum dolor sit amet</div>
+					<div class="photo">
+						<i class="fa-solid fa-user"></i>
+					</div>
+					<div class="name" id="name">Lorem ipsum dolor sit amet</div>
 				</div>
 			</div>
 		</div>

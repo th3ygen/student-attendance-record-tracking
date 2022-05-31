@@ -35,68 +35,118 @@
 				<a href="ManageClass.html" class="active">Class</a>
 				<a href="Attendance.html">Attendance</a>
 				<a href="Report.html">Report</a>
-				<a href="Notification.html">Notification</a>
 			</nav>
 			<div class="settings">
-				<div class="noti"></div>
+				<button
+					id="notinav"
+					type="button"
+					class="noti btn btn-primary position-relative"
+				>
+					<i class="fa-solid fa-bell"></i>
+					<span
+						class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+					>
+						99+
+					</span>
+				</button>
 				<div class="user">
-					<div class="photo"></div>
-					<div class="name">Lorem ipsum dolor sit amet</div>
+					<div class="photo">
+						<i class="fa-solid fa-user"></i>
+					</div>
+					<div class="name" id="name">Lorem ipsum dolor sit amet</div>
 				</div>
 			</div>
 		</div>
 		<div class="mcontainer">
-			<div class="classForm">
-				<div class="itemForm">
-					<div class="name">Class Name</div>
-					<input
-						type="text"
-						name="className"
-						id="className"
-						class="inputForm"
-					/>
-				</div>
-				<div class="itemForm">
-					<div class="max">Max Student</div>
-					<input
-						class="inputForm"
-						type="number"
-						name="maxStudent"
-						id="maxStudent"
-					/>
-				</div>
-				<div class="itemForm">
-					<div class="timeSlot">Time Slot #1</div>
-					<select name="timeSlot1" id="timeSlot1" class="inputForm">
-						<option value="08.00am-10.00am">08.00am-10.00am</option>
-						<option value="10.00am-12.00pm">10.00am-12.00pm</option>
-						<option value="12.00pm-02.00pm">12.00pm-02.00pm</option>
-						<option value="02.00pm-04.00pm">02.00pm-04.00pm</option>
-						<option value="04.00pm-06.00pm">04.00pm-06.00pm</option>
-						<option value="08.00pm-10.00pm">08.00pm-10.00pm</option>
-					</select>
-				</div>
-				<div class="itemForm">
-					<div class="timeSlot">Time Slot #2</div>
-					<select name="timeSlot2" id="timeSlot2" class="inputForm">
-						<option value="08.00am-10.00am">08.00am-10.00am</option>
-						<option value="10.00am-12.00pm">10.00am-12.00pm</option>
-						<option value="12.00pm-02.00pm">12.00pm-02.00pm</option>
-						<option value="02.00pm-04.00pm">02.00pm-04.00pm</option>
-						<option value="04.00pm-06.00pm">04.00pm-06.00pm</option>
-						<option value="08.00pm-10.00pm">08.00pm-10.00pm</option>
-					</select>
-				</div>
-				<div class="listForm">
-					<div class="studentTitle">Student</div>
-					<select
-						name="student"
-						id="selectStd"
-						class="inputForm"
-						onchange="addStudent(value)"
-					>
-                    <option value="none" selected>- Select student -</option>
-						<!-- <option value="Nur Izzaty bt Ariffin">
+			<form>
+				<div class="classForm">
+					<div class="itemForm">
+						<div class="name">Class Name</div>
+						<input
+							type="text"
+							name="className"
+							id="className"
+							class="inputForm"
+						/>
+					</div>
+					<div class="itemForm">
+						<div class="max">Max Student</div>
+						<input
+							class="inputForm"
+							type="number"
+							name="maxStudent"
+							id="maxStudent"
+						/>
+					</div>
+					<div class="itemForm">
+						<div class="timeSlot">Time Slot #1</div>
+						<select
+							name="timeSlot1"
+							id="timeSlot1"
+							class="inputForm"
+						>
+							<option value="08.00am-10.00am">
+								08.00am-10.00am
+							</option>
+							<option value="10.00am-12.00pm">
+								10.00am-12.00pm
+							</option>
+							<option value="12.00pm-02.00pm">
+								12.00pm-02.00pm
+							</option>
+							<option value="02.00pm-04.00pm">
+								02.00pm-04.00pm
+							</option>
+							<option value="04.00pm-06.00pm">
+								04.00pm-06.00pm
+							</option>
+							<option value="08.00pm-10.00pm">
+								08.00pm-10.00pm
+							</option>
+						</select>
+					</div>
+					<div class="itemForm">
+						<div class="timeSlot">Time Slot #2</div>
+						<select
+							name="timeSlot2"
+							id="timeSlot2"
+							class="inputForm"
+						>
+							<option value="-">
+								-
+							</option>
+							<option value="08.00am-10.00am">
+								08.00am-10.00am
+							</option>
+							<option value="10.00am-12.00pm">
+								10.00am-12.00pm
+							</option>
+							<option value="12.00pm-02.00pm">
+								12.00pm-02.00pm
+							</option>
+							<option value="02.00pm-04.00pm">
+								02.00pm-04.00pm
+							</option>
+							<option value="04.00pm-06.00pm">
+								04.00pm-06.00pm
+							</option>
+							<option value="08.00pm-10.00pm">
+								08.00pm-10.00pm
+							</option>
+						</select>
+					</div>
+					<div class="listForm">
+						<div class="studentTitle">Student</div>
+						<select
+							name="student"
+							id="selectStd"
+							class="inputForm"
+							onchange="addStudent(value)"
+						>
+							<option value="none" selected>
+								- Select student -
+							</option>
+							<!-- <option value="Nur Izzaty bt Ariffin">
 							Nur Izzaty bt Ariffin
 						</option>
 						<option value="Muhammad Danial b. Mohammad Rizwan">
@@ -105,15 +155,15 @@
 						<option value="Muhammad Aidil Syazwan b. Hamdan">
 							Muhammad Aidil Syazwan b. Hamdan
 						</option> -->
-					</select>
+						</select>
 
-					<div class="listStudent">
-						<div class="count">
-							<div class="title">Total Student</div>
-							<div id="stdCount" class="tStudent">0</div>
-						</div>
-						<div id="studentTable">
-							<!-- <div class="stud">
+						<div class="listStudent">
+							<div class="count">
+								<div class="title">Total Student</div>
+								<div id="stdCount" class="tStudent">0</div>
+							</div>
+							<div id="studentTable">
+								<!-- <div class="stud">
 								<div class="studName">
 									Nur Izzaty bt Ariffin
 								</div>
@@ -121,11 +171,15 @@
 									<i class="fa-solid fa-xmark-large"></i>
 								</div>
 							</div> -->
+							</div>
 						</div>
 					</div>
+					<div class="but">
+						<div class="button" onclick="discard()">Undo</div>
+						<div class="button" onclick="submit()">Submit</div>
+					</div>
 				</div>
-				<div class="button" onclick="submit()">Submit</div>
-			</div>
+			</form>
 		</div>
 
 		<script
@@ -133,7 +187,7 @@
 			integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
 			crossorigin="anonymous"
 		></script>
-
+		<script src="../js/global.js"></script>
 		<script>
 			const table = document.querySelector("#studentTable");
 			const select = document.querySelector("#selectStd");
@@ -142,6 +196,10 @@
 			let id = 0;
 			let c = 0;
 			const stds = {};
+
+			function discard() {
+				window.location.reload();
+			}
 
 			function addStudent(value) {
 				if (value === "none") return;
@@ -204,21 +262,24 @@
 					.filter((key) => stds[key].selected)
 					.map((key) => stds[key].id);
 
-                console.log(students);
+				console.log(students);
 
-				const req = await fetch(`http://localhost:3000/api/class/edit/${classId}`, {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify({
-						name,
-						teacherId,
-						maxStudent,
-						timeslots: [timeslot1, timeslot2],
-						students,
-					}),
-				});
+				const req = await fetch(
+					`http://localhost:3000/api/class/edit/${classId}`,
+					{
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify({
+							name,
+							teacherId,
+							maxStudent,
+							timeslots: [timeslot1, timeslot2],
+							students,
+						}),
+					}
+				);
 
 				if (req.status === 200) {
 					alert("Class update successfully");
@@ -270,11 +331,11 @@
 						const { students } = await req.json();
 
 						for (let student of students) {
-                            if (stds[student.name] === undefined) {
-                                stds[student.name] = {
-                                    id: student._id,
-                                    selected: false,
-                                };
+							if (stds[student.name] === undefined) {
+								stds[student.name] = {
+									id: student._id,
+									selected: false,
+								};
 								appendStudentIntoList(student.name);
 							}
 						}

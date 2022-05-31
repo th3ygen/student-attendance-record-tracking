@@ -1,0 +1,133 @@
+.mcontainer {
+    padding: 140px 15%;
+    height: 100%;
+}
+
+.wrapper {
+    width: 100%;
+    
+    padding: 20px;
+
+    background: rgba(222, 219, 210, 0.50);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(7.4px);
+    -webkit-backdrop-filter: blur(7.4px);
+    border: 1px solid rgba(255, 255, 255, 0.33);
+}
+
+.listForm{
+    padding: 10px 20px;
+    width: 100%;
+    
+    background: transparent;
+    
+    border-radius: 8px;
+}
+
+.inputForm{
+    width: 100%;
+    height: 40px;
+    border-radius: 8px;
+    
+    border: none;
+    border-bottom: solid 2px #313715;
+    margin-top: 20px;
+    background-color: transparent;
+}
+
+#form {
+    display: flex;
+    gap: 20px;
+
+    flex-wrap: wrap;
+}
+
+#form > .item {
+    width: 100%;
+}
+
+#form > .item > .label {
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 10px;
+    padding-left: 5px;
+}
+
+#form > .item.students {
+    width: 100%;
+    border: 3px solid #009480;
+    border-radius: 8px;
+}
+
+#form > .item.students .label {
+    width: 100%;
+    background: #009480;
+    padding: 10px 15px;
+    color: white;
+}
+
+#form > .item.students .table {
+    display: flex;
+    gap: 10px;
+
+    flex-direction: column;
+
+    padding: 15px 20px;
+}
+
+#form > .item.students .table > .item {
+    display: flex;
+    justify-content: space-between;
+
+    border: 2px solid #009480;
+}
+
+#form > .item.students .table > .item > .name {
+    padding: 5px 10px;
+
+    display: flex;
+    align-items: center;
+}
+
+#form > .item.students .table > .item .action i {
+    font-size: 16px;
+}
+
+#form > .item.students .table > .item > .recActions {
+    display: flex;
+
+}
+
+#form > .item.students .table > .item > .recActions .action {
+    background: #004138;
+    color: white;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 15px;
+
+    cursor: pointer;
+
+    transition: .3s all;
+}
+#form > .item.students .table > .item > .recActions .action.active {
+    background: #009480;
+}
+
+#form .attActions {
+    display: flex;
+    width: 100%;
+
+    justify-content: flex-end;
+}
+
+#form .attActions .button {
+    background: #009480;
+    padding: 8px 30px;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}

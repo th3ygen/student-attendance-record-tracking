@@ -1,19 +1,16 @@
 const _Class = require("../models/Class");
 const _Attendance = require("../models/Attendance");
-const _AttendanceRecord = require("../models/Attendance");
 const _Student = require('../models/Student');
 
 module.exports = {
-    mark: async (req, res) => {
+    newAttendance: async (req, res) => {
         try {
-            const { studentId, date, status, datetime, timeslot } = req.body;
+            const { classId, date, timeslot, list } = req.body;
+
+			console.log(classId, date, timeslot, list);
 
 			const attendance = new _Attendance({
-				studentId,
-				date,
-				status,
-				datetime,
-				timeslot,
+				classId, date, timeslot, list
 			});
 
 			await attendance.save();
@@ -27,6 +24,40 @@ module.exports = {
 			});
 		}
     },
+	getAttendances: async (req, res) => {
+		try {
+			const attendances = await _Attendance.find();
+
+			const result = [];
+			for (let attendance of attendances) {
+				let data = {};
+
+				const classId = attendance.classId;
+				const _class = await _Class.findById(classId);
+				attendance.className = _class.name;
+
+				const total = attendance.list.length;
+				const attended = attendance.list.filter(student => student.status === 'attend').length;
+
+				data.id = attendance._id;
+				data.date = attendance.date;
+				data.className = _class.name;
+				data.rate = (attended / total * 100).toFixed(2);
+				data.total = total;
+				data.completeness = 100;
+
+				result.push(data);
+			}
+
+			res.json({
+				attendances: result,
+			});
+		} catch (e) {
+			res.status(500).json({
+				message: e.message,
+			});
+		}
+	},
     getTotalAttend: async (req, res) => {
 		try {
 			const atts = await _Attendance.find({});
@@ -206,26 +237,6 @@ module.exports = {
 			});
 		}
     },
-	newAttendance: async (req, res) => {
-		try {
-			const { classId, dueDate } = req.body;
-
-			const att = new _Attendance({
-				date: new Date(),
-				classId, dueDate
-			});
-
-			await att.save();
-
-			return res.status(200).json({
-				attendance: att
-			});
-		} catch (e) {
-			res.status(500).json({
-				message: e.message,
-			});
-		}
-	},
 	editClass: async (req, res) => {
 		try {
 			const { classId, name, timeSlots, students, teacherId } = req.body;

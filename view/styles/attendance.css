@@ -107,11 +107,39 @@
   color: white;
 }
 
+.mcontainer {
+  gap: 10px !important;
+}
+
 .header {
   padding: 20px 10px;
 
+  display: flex;
+  justify-content: space-between;
 }
 
 .header > .title {
-  
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.header > .actions .btn-add {
+  background-color: #009480;
+  color: white;
+
+  padding: 10px 20px;
+
+  font-size: 18px;
+
+  border-radius: 8px;
+
+  cursor: pointer;
+}
+
+#table {
+  width: 100%;
+}
+
+.grid {
+  width: 100%;
 }

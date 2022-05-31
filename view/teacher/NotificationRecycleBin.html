@@ -32,13 +32,19 @@
 				<a href="ManageClass.html">Class</a>
 				<a href="Attendance.html">Attendance</a>
 				<a href="Report.html">Report</a>
-				<a href="Notification.html" class="active">Notification</a>
 			</nav>
 			<div class="settings">
-				<div class="noti"></div>
+				<button id="notinav" type="button" class="noti btn btn-primary position-relative">
+					<i class="fa-solid fa-bell"></i>
+					<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+					  99+
+					</span>
+				  </button>
 				<div class="user">
-					<div class="photo"></div>
-					<div class="name" id="name">Lecturer : Ayuni Baiduri</div>
+					<div class="photo">
+						<i class="fa-solid fa-user"></i>
+					</div>
+					<div class="name" id="name">Lorem ipsum dolor sit amet</div>
 				</div>
 			</div>
 		</div>
@@ -151,7 +157,7 @@
 			integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
 			crossorigin="anonymous"
 		></script>
-
+		<script src="../js/global.js"></script>
 		<script>
 			try {
 				const user = JSON.parse(localStorage.getItem("user"));
