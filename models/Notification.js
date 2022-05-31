@@ -20,6 +20,8 @@ const notiSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Class',
     }
+}, {
+    timestamps: true
 });
 
 const Notification = model('Notification', notiSchema);

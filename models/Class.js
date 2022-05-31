@@ -15,7 +15,7 @@ const classSchema = new Schema({
         required: true
     },
 }, {
-    timestamp: true
+    timestamps: true
 });
 
 classSchema.statics.add = function (name) {

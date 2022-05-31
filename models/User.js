@@ -29,17 +29,16 @@ const userSchema = new Schema({
     timestamps: true
 });
 
-userSchema.statics.register = function (name, email, username, password, role) {
-    if (!['admin', 'teacher'].includes(role)) {
-        role = 'teacher';
-    }
+userSchema.statics.register = function (name, email, username, password) {
+    
+    console.log(name, email, username, password);
 
     return this.create({
         name,
         email,
         username,
         password: bcrypt.hashSync(password, 10),
-        role
+        role: 'teacher'
     });
 }
 

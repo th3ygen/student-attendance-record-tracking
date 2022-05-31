@@ -9,6 +9,8 @@ const studentSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Class'
     }],
+}, {
+    timestamps: true
 });
 
 const Student = model('Student', studentSchema);

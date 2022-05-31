@@ -20,9 +20,9 @@ module.exports = {
     },
     register: async (req, res) => {
         try {
-            const { username, password } = req.body;
+            const { name, email, username, password } = req.body;
 
-            const token = User.register(username, password);
+            const token = User.register(name, email, username, password);
 
             res.json({token});
         } catch (error) {

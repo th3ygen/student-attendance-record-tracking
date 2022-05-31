@@ -14,6 +14,8 @@ const recSchema = new Schema({
         },
         status: String,
     }],
+}, {
+    timestamps: true
 });
 
 module.exports = model('Attendance', recSchema); 

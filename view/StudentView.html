@@ -9,8 +9,15 @@
     <link rel="stylesheet" href="./styles/global.css">
     <link rel="stylesheet" href="./styles/admin.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+			integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+			crossorigin="anonymous"
+		/>
 
+		<script src="https://kit.fontawesome.com/646cc00c51.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="topbar">
@@ -18,7 +25,6 @@
         <nav class="nav">
             <a href="StudentView.html" class="active">Student</a>
             <a href="TeacherView.html">Teacher</a>
-            <a href="/teacher/ManageClass.html">Class</a>
         </nav>
         <div class="settings">
             <button id="notinav" type="button" class="noti btn btn-primary position-relative">
@@ -61,7 +67,7 @@
         <table class="table table-striped table-condensed" id="tblData">
             <thead>
             <tr>
-                <th>Student ID</th>
+                <th>No.</th>
                 <th>Student Name</th>
                 <th>Actions</th>
             </tr>
@@ -101,10 +107,11 @@
 
             console.log(students);
 
+            let x = 0;
             for (let student of students) {
                 document.querySelector('#list').innerHTML += `
                     <tr>
-                        <td class="solid">${student.id}</td>
+                        <td class="solid">${++x}</td>
                         <td class="solid">${student.name}</td>
                         <td class="solid">
                             <button class="btn btn-primary" onclick="deleteStudent('${student._id}')"><i class="fa fa-trash"></i></button>
