@@ -91,7 +91,7 @@ async function submit() {
 }
 
 window.onload = async () => {
-	const req = await fetch("http://localhost:3000/api/class/student/get");
+	const req = await fetch("http://localhost:3000/api/class/students/get");
 
 	if (req.status === 200) {
 		const { students } = await req.json();
