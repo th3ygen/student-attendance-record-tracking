@@ -42,6 +42,31 @@ module.exports = {
             });
         }
     },
+    editTeacher: async (req, res) => {
+        try {
+            const { id, name, email, username } = req.body;
+
+            const teacher = await User.findById(id);
+
+            if (!teacher) {
+                res.status(404).send('Teacher not found');
+            }
+
+            teacher.name = name;
+            teacher.email = email;
+            teacher.username = username;
+
+            await teacher.save();
+
+            res.status(200).json({
+                teacher
+            });
+        } catch (e) {
+            res.status(500).json({
+                message: e.message,
+            });
+        }
+    },
     getTeachers: async (req, res) => {
         try {
             const teachers = await User.find({role: 'teacher'});

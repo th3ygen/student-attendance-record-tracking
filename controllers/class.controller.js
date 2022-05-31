@@ -187,6 +187,31 @@ module.exports = {
 			});
 		}
 	},
+	editStudent: async (req, res) => {
+		try {
+			const { name, classEnrolled } = req.body;
+
+			const student = await _Student.findById(id);
+
+			if (!student) {
+				return res.status(404).json({
+					message: "Student not found",
+				});
+			}
+
+			student.name = name;
+
+			await student.save();
+
+			res.status(200).json({
+				message: "Student edited",
+			});
+		} catch (e) {
+			res.status(500).json({
+				message: e.message,
+			});
+		}
+	},
 	editClass: async (req, res) => {
 		try {
 			const { name, maxStudent, teacherId, timeslots, students } = req.body;

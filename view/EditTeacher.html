@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Edit Lecturer</title>
+
+		<link rel="stylesheet" href="./styles/global.css" />
+		<link rel="stylesheet" href="./styles/admin.css" />
+		<link
+			rel="stylesheet"
+			href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
+	</head>
+	<body>
+		<div class="topbar">
+			<div class="logo"></div>
+			<nav class="nav">
+				<a href="StudentView.html">Student</a>
+				<a href="TeacherView.html" class="active">Teacher</a>
+				<a href="/teacher/ManageClass.html">Class</a>
+			</nav>
+			<div class="settings">
+				<button id="notinav" type="button" class="noti btn btn-primary position-relative">
+					<i class="fa-solid fa-bell"></i>
+					<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+					  99+
+					</span>
+				  </button>
+				<div class="user">
+					<div class="photo">
+						<i class="fa-solid fa-user"></i>
+					</div>
+					<div class="name" id="name">Lorem ipsum dolor sit amet</div>
+				</div>
+			</div>
+		</div>
+		<div class="mcontainer" style="padding-top: 150px">
+			<section class="dashboard">
+				<form id="form">
+					<br /><br />
+					<h2 style="text-align: center"><b>Add New Lecturer</b></h2>
+					<p style="font-size: 15px; color: grey; text-align: center">
+						Fill in all new lecturer details in the fields
+					</p>
+					<br />
+					<input
+						type="text"
+						id="lec_name"
+						name="lec_name"
+						placeholder="Lecturer Name"
+						required
+					/><br />
+					<br />
+					<input
+						type="text"
+						id="username"
+						name="username"
+						placeholder="Username"
+						disabled
+					/><br />
+					<br />
+					<input
+						type="email"
+						id="lec_email"
+						name="lec_email"
+						placeholder="Lecturer Email"
+						required
+					/><br />
+					<br />
+					<input
+						type="password"
+						id="lec_pass"
+						name="lec_pass"
+						placeholder="Password"
+						disabled
+					/><br />
+					<br />
+					<br />
+					<br />
+					<button type="submit" name="submit">
+						Edit Lecturer
+					</button>
+				</form>
+			</section>
+		</div>
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+			integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
+		<script type="text/javascript">
+			function link() {
+				window.location = "TeacherView.html";
+			}
+
+			form.addEventListener("submit", addTeacher);
+
+			async function addTeacher(e) {
+				e.preventDefault();
+
+				const name = document.querySelector("#lec_name").value;
+				const email = document.querySelector("#lec_email").value;
+                const username = document.querySelector("#username").value;
+
+				const data = {
+					name,
+					email,
+                    username,
+				};
+
+				const req = await fetch(
+					"http://localhost:3000/api/user/teacher/new",
+					{
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(data),
+					}
+				);
+
+				if (req.status === 200) {
+					alert("Lecturer added successfully");
+				} else {
+					alert("Error adding lecturer");
+				}
+
+				return false;
+			}
+		</script>
+	</body>
+</html>

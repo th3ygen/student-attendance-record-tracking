@@ -105,8 +105,6 @@
 
             const {students} = await req.json();
 
-            console.log(students);
-
             let x = 0;
             for (let student of students) {
                 document.querySelector('#list').innerHTML += `
@@ -118,9 +116,6 @@
                         </td>
                     </tr>`;
             }
-
-
-            console.log(students);
         }
     </script>
 </body>
