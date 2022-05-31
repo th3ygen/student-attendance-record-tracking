@@ -100,8 +100,12 @@
             
         }
 
+        async function editStudent(id) {
+            window.location.href = 'EditStudent.html?id=' + id;
+        }
+
         window.onload = async () => {
-            const req = await fetch('http://localhost:3000/api/class/student/get');
+            const req = await fetch('http://localhost:3000/api/class/students/get');
 
             const {students} = await req.json();
 
@@ -112,6 +116,7 @@
                         <td class="solid">${++x}</td>
                         <td class="solid">${student.name}</td>
                         <td class="solid">
+                            <button class="btn btn-primary" onclick="editStudent('${student._id}')"><i class="fa fa-pen"></i></button>
                             <button class="btn btn-primary" onclick="deleteStudent('${student._id}')"><i class="fa fa-trash"></i></button>
                         </td>
                     </tr>`;

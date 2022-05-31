@@ -4,7 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Add Student</title>
+		<title>Edit Student</title>
 
 		<link
 			rel="stylesheet"
@@ -62,7 +62,7 @@
 			<section class="dashboard">
 				<form id="form">
 					<br /><br />
-					<h2 style="text-align: center"><b> New Student</b></h2>
+					<h2 style="text-align: center"><b>Edit Student</b></h2>
 					<p style="font-size: 15px; color: grey; text-align: center">
 						Fill in all new student details in the fields
 					</p>
@@ -79,7 +79,7 @@
 
 					<br />
 					<br />
-					<button type="submit" name="submit">Add New Student</button>
+					<button type="submit" name="submit">Update Student</button>
 				</form>
 			</section>
 		</div>
@@ -88,41 +88,46 @@
 				window.location = "StudentView.html";
 			}
 
-			const form = document.querySelector("#form");
-
-			form.addEventListener("submit", newStudent);
-
-			async function newStudent(e) {
+			async function edit(e) {
 				e.preventDefault();
 
-				const name = document.querySelector("#std_name").value;
-				const id = document.querySelector("#std_id").value;
+				const id = window.location.search.substring(1).split("=")[1];
+				const name = document.getElementById("std_name").value;
 
-				const data = {
-					name,
-					id,
-				};
-
-				const req = await fetch(
-					"http://localhost:3000/api/class/student/new",
-					{
-						method: "POST",
-						body: JSON.stringify(data),
-						headers: {
-							"Content-Type": "application/json",
-						},
-					}
-				);
+				const req = await fetch(`http://localhost:3000/api/class/std/update`, {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						name: name,
+						id
+					})
+				});
 
 				if (req.status === 200) {
-					alert("Student added successfully");
-					window.location = "StudentView.html";
+					alert("Student Updated");
+					link();
 				} else {
-					alert("Error adding student");
+					alert("Error");
 				}
 
-				return true;
+				return false;
 			}
+
+			const form = document.querySelector("#form");
+
+			form.addEventListener("submit", edit);
+
+			window.onload = async () => {
+				const req = await fetch("http://localhost:3000/api/class/student/"+window.location.search.substring(1).split("=")[1]);
+
+				if (req.status === 200) {
+					const {student} = await req.json();
+
+					document.querySelector("#std_name").value = student.name;
+				}
+			};
 		</script>
 	</body>
 </html>

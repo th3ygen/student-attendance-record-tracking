@@ -6,6 +6,8 @@ router.get('/', (req, res) => {
 });
 
 router.get('/teacher/get', controller.getTeachers);
+router.get('/tch/:id', controller.getTeacher);
+router.post('/tchs2/update', controller.editTeacher);
 
 router.delete('/teacher/delete/:id', controller.deleteTeacher);
 

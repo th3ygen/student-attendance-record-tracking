@@ -189,7 +189,7 @@ module.exports = {
 	},
 	editStudent: async (req, res) => {
 		try {
-			const { name, classEnrolled } = req.body;
+			const { id, name } = req.body;
 
 			const student = await _Student.findById(id);
 
@@ -205,6 +205,25 @@ module.exports = {
 
 			res.status(200).json({
 				message: "Student edited",
+			});
+		} catch (e) {
+			res.status(500).json({
+				message: e.message,
+			});
+		}
+	},
+	getStudent: async (req, res) => {
+		try {
+			const student = await _Student.findById(req.params.id);
+
+			if (!student) {
+				return res.status(404).json({
+					message: "Student not found",
+				});
+			}
+
+			res.status(200).json({
+				student,
 			});
 		} catch (e) {
 			res.status(500).json({

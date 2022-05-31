@@ -6,6 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lecturer View</title>
 
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+    crossorigin="anonymous"
+    />
+
+    <script
+        src="https://kit.fontawesome.com/646cc00c51.js"
+        crossorigin="anonymous"
+    ></script>
+
     <link rel="stylesheet" href="./styles/global.css">
     <link rel="stylesheet" href="./styles/admin.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
@@ -94,6 +106,10 @@
             }
         }
 
+        async function editTeacher(id) {
+            window.location.href = "EditTeacher.html?id=" + id;
+        }
+
         window.onload = async () => {
             try {
                 const req = await fetch('http://localhost:3000/api/user/teacher/get');
@@ -112,6 +128,7 @@
                             <td>${username}</td>
                             <td>${email}</td>
                             <td>
+                                <button class="btn btn-primary" onclick="editTeacher('${_id}')"><i class="fa fa-pen"></i></button>
                                 <button class="btn btn-primary" onclick="deleteTeacher('${_id}')"><i class="fa fa-trash"></i></button>
                             </td>
                         `;

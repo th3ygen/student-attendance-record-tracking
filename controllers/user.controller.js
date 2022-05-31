@@ -44,9 +44,11 @@ module.exports = {
     },
     editTeacher: async (req, res) => {
         try {
-            const { id, name, email, username } = req.body;
+            console.log('test');
+            const { id, name, email } = req.body;
 
             const teacher = await User.findById(id);
+
 
             if (!teacher) {
                 res.status(404).send('Teacher not found');
@@ -54,9 +56,25 @@ module.exports = {
 
             teacher.name = name;
             teacher.email = email;
-            teacher.username = username;
 
             await teacher.save();
+
+            res.status(200).json({
+                teacher
+            });
+        } catch (e) {
+            res.status(500).json({
+                message: e.message,
+            });
+        }
+    },
+    getTeacher: async (req, res) => {
+        try {
+            const teacher = await User.findById(req.params.id);
+
+            if (!teacher) {
+                res.status(404).send('Teacher not found');
+            }
 
             res.status(200).json({
                 teacher
