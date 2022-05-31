@@ -208,11 +208,10 @@ table {
 
     width:100%;
     resize: vertical;
-    padding:10px;
-    border-radius:20px;
+    padding: 12.5px;
+    border-radius: 10px;
     border:0;
-    box-shadow:4px 4px 10px rgba(0,0,0,0.5);
-    height:50px;
+    height: fit-content;
   }
 
 
@@ -266,4 +265,15 @@ table {
         left: 0;
         width: 100%;
     }
+}
+
+.btn-primary{
+    background-color: #009480 !important;
+}
+
+.btnRes{
+    background-color: #009480;
+    color: white;
+    width: 150px;
+    border-radius: 0 !important;
 }
