@@ -96,11 +96,9 @@
 				e.preventDefault();
 
 				const name = document.querySelector("#std_name").value;
-				const id = document.querySelector("#std_id").value;
 
 				const data = {
-					name,
-					id,
+					name
 				};
 
 				const req = await fetch(

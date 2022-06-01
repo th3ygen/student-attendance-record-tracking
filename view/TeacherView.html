@@ -50,25 +50,19 @@
         <section class="dashboard">
             <div class="dash-content">
                 <div class="overview">
-                    <div class="title">
-                        <i class="fa fa-user-circle"></i>
-                        <span class="text">Lecturers</span>
-                    </div>
-    
-        <form action="lecturer_view.html" method="POST">
-            <div>
-                <div class="search">
-                    <input type="text" class="searchTerm" name="valueToSearch"  placeholder="Search for Lecturer Name ...">
-                    <button class="searchButton" type="submit" name="search_btn" value="Search"><i class="fa fa-search"></i></button> 
-                </div>
+                    
+        <div class="contentHead">
+            <div class="title">
+                <i class="fa fa-user-circle"></i>
+                <span class="text">Lecturers</span>
             </div>
-        </form>
-        <br>
-        <div class="cont">
-            <button><a href="AddTeacher.html" title="Add New Lecturer">
-            <i class="fa fa-plus" aria-hidden="true"></i> Add New Lecturer
-            </a></button>
-        </div>
+            <div class="cont">
+                <button><a href="AddTeacher.html" title="Add New Lecturer">
+                <i class="fa fa-plus" aria-hidden="true"></i> Add New Lecturer
+                </a></button>
+            </div>
+        </div>            
+        
         <table class="table table-striped table-condensed" id="tblData">
             <thead>
             <tr>
@@ -129,7 +123,7 @@
                             <td>${email}</td>
                             <td>
                                 <button class="btn btn-primary" onclick="editTeacher('${_id}')"><i class="fa fa-pen"></i></button>
-                                <button class="btn btn-primary" onclick="deleteTeacher('${_id}')"><i class="fa fa-trash"></i></button>
+                                <button class="btn btn-primary" onclick="deleteTeacher('${_id}')"><i class="fa-solid fa-trash"></i></button>
                             </td>
                         `;
 

@@ -15,7 +15,6 @@
 .dash-content .title{
     display: flex;
     align-items: center;
-    margin: 60px 0 30px 0;
 }
 .dash-content .title i{
     position: relative;
@@ -191,6 +190,15 @@ table {
     width:100%;
     transition:800ms ease all;
   }
+
+  .contentHead {
+    padding: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+  }
+
   .cont a {
     color: #000000;
     text-decoration: none;
@@ -200,11 +208,10 @@ table {
 
     width:100%;
     resize: vertical;
-    padding:10px;
-    border-radius:20px;
+    padding: 12.5px;
+    border-radius: 10px;
     border:0;
-    box-shadow:4px 4px 10px rgba(0,0,0,0.5);
-    height:50px;
+    height: fit-content;
   }
 
 
@@ -258,4 +265,15 @@ table {
         left: 0;
         width: 100%;
     }
+}
+
+.btn-primary{
+    background-color: #009480 !important;
+}
+
+.btnRes{
+    background-color: #009480;
+    color: white;
+    width: 150px;
+    border-radius: 0 !important;
 }
