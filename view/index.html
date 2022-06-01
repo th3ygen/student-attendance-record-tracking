@@ -53,6 +53,12 @@
                     const {user} = await req.json();
 
                     localStorage.setItem('user', JSON.stringify(user));
+
+                    if (user.role === 'teacher') {
+                        window.location = './teacher/ManageClass.html';
+                    } else {
+                        window.location = './StudentView.html';
+                    }
                 }
             }
 

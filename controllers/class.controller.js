@@ -307,7 +307,7 @@ module.exports = {
 	},
 	getClass: async (req, res) => {
 		try {
-			const _class = await _Class.findById(req.params.id);
+			const _class = await _Class.findById(req.query.id);
 
 			if (!_class) {
 				return res.status(404).json({

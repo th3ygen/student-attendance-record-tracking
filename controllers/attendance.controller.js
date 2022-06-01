@@ -24,6 +24,21 @@ module.exports = {
 			});
 		}
     },
+	deleteAttendance: async (req, res) => {
+		try {
+			const id = req.params.id;
+
+			const attendance = await _Attendance.findByIdAndDelete(id);
+
+			res.status(200).json({
+				message: "Attendance deleted",
+			});
+		} catch (e) {
+			res.status(500).json({
+				message: e.message,
+			});
+		}
+	},
 	getAttendances: async (req, res) => {
 		try {
 			const attendances = await _Attendance.find();

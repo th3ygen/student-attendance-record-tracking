@@ -30,9 +30,6 @@ const userSchema = new Schema({
 });
 
 userSchema.statics.register = function (name, email, username, password) {
-    
-    console.log(name, email, username, password);
-
     return this.create({
         name,
         email,
