@@ -39,6 +39,17 @@ userSchema.statics.register = function (name, email, username, password) {
     });
 }
 
+userSchema.statics.registerAdmin = function (name, email, username, password) {
+    return this.create({
+        name,
+        email,
+        username,
+        password: bcrypt.hashSync(password, 10),
+        role: 'admin'
+    });
+}
+
+
 userSchema.statics.login = async function (username, password) {
     const user = await this.findOne({ username });
 

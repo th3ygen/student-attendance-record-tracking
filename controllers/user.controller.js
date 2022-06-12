@@ -8,7 +8,7 @@ module.exports = {
             const user = await User.login(username, password);
 
             if (!user) {
-                res.status(401).send('Invalid username or password');
+                return res.status(401).send('Invalid username or password');
             }
 
             res.status(200).json({
@@ -51,7 +51,7 @@ module.exports = {
 
 
             if (!teacher) {
-                res.status(404).send('Teacher not found');
+                return res.status(404).send('Teacher not found');
             }
 
             teacher.name = name;
@@ -73,7 +73,7 @@ module.exports = {
             const teacher = await User.findById(req.params.id);
 
             if (!teacher) {
-                res.status(404).send('Teacher not found');
+                return res.status(404).send('Teacher not found');
             }
 
             res.status(200).json({

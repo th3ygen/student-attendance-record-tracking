@@ -85,8 +85,6 @@ body {
 
     gap: 30px;
 
-    padding: 20px;
-    padding-right: 50px;
 }
 
 .settings .noti {
@@ -97,15 +95,52 @@ body {
 
 .settings .user {
     height: 30px;
-    width: 300px;
+    width: 400px;
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
 
     gap: 10px;
 }
 
+.settings .name {
+    flex: 1 1 100%;
+}
+
+.settings .logout {
+    flex: 0 0 50px;
+
+    height: 50px;
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    background: #009480;
+
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.4);
+
+    transition: .3s all;
+
+    color: white;
+
+    cursor: pointer;
+} 
+
+.settings .logout:hover {
+    flex: 0 0 100px;
+
+    height: 100px;
+
+    background: #94000c;
+}
+
 .settings .photo {
+    flex: 0 0 60px;
+
     background: #009480;
 
     height: 60px;

@@ -40,23 +40,29 @@
 			<nav class="nav">
 				<a href="ManageClass.html">Class</a>
 				<a href="Attendance.html">Attendance</a>
-				<a href="Report.html">Report</a>
+				<a href="Report.html" class="active">Report</a>
 			</nav>
 			<div class="settings">
-				<button id="notinav" type="button" class="noti btn btn-primary position-relative">
+				<button
+					id="notinav"
+					type="button"
+					class="noti btn btn-primary position-relative"
+				>
 					<i class="fa-solid fa-bell"></i>
-					<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-					  1
+					<span
+						class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+					>
+						99+
 					</span>
-				  </button>
+				</button>
 				<div class="user">
 					<div class="photo">
 						<i class="fa-solid fa-user"></i>
 					</div>
 					<div class="name" id="name">Lorem ipsum dolor sit amet</div>
+					<div class="logout" onclick="logout()"><i class="gg-log-out"></i></div>
 				</div>
 			</div>
-		</div>>
 		</div>
 		<div class="mcontainer" style="padding-top: 130px">
 			<div class="heading">
@@ -114,6 +120,10 @@
 		></script>
 		<script src="../js/global.js"></script>
 		<script>
+			if (localStorage.getItem("user") == null) {
+				window.location.href = "index.html";
+			}
+
 			try {
 				const user = JSON.parse(localStorage.getItem("user"));
 

@@ -20,7 +20,10 @@
 			crossorigin="anonymous"
 		/>
 
-		<script src="https://kit.fontawesome.com/646cc00c51.js" crossorigin="anonymous"></script>
+		<script
+			src="https://kit.fontawesome.com/646cc00c51.js"
+			crossorigin="anonymous"
+		></script>
 
 		<link rel="stylesheet" href="../styles/global.css" />
 		<link rel="stylesheet" href="../styles/class.css" />
@@ -44,7 +47,7 @@
 					<span
 						class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
 					>
-						1
+						99+
 					</span>
 				</button>
 				<div class="user">
@@ -52,6 +55,7 @@
 						<i class="fa-solid fa-user"></i>
 					</div>
 					<div class="name" id="name">Lorem ipsum dolor sit amet</div>
+					<div class="logout" onclick="logout()"><i class="gg-log-out"></i></div>
 				</div>
 			</div>
 		</div>
@@ -66,6 +70,10 @@
 		</div>
 		<script src="../js/global.js"></script>
 		<script type="module">
+			if (localStorage.getItem("user") == null) {
+				window.location.href = "index.html";
+			}
+
 			import { Grid, html } from "https://unpkg.com/gridjs?module";
 
 			const ids = [];
@@ -132,21 +140,32 @@
 
 			setTimeout(() => {
 				for (let id of ids) {
-					document.getElementById(`edit_${id.id}`).addEventListener("click", () => {
-						localStorage.setItem("id", id.id);
-						localStorage.setItem("name", id.name);
+					document
+						.getElementById(`edit_${id.id}`)
+						.addEventListener("click", () => {
+							localStorage.setItem("id", id.id);
+							localStorage.setItem("name", id.name);
 
-						location.href = "./EditAttendance.html";
-					});
+							location.href = "./EditAttendance.html";
+						});
 
-					document.getElementById(`del_${id.id}`).addEventListener("click", () => {
-						if (confirm("Are you sure you want to delete this class?")) {
-							fetch(`http://localhost:3000/api/attendance/delete/${id.id}`, {
-								method: "DELETE",
-							});
-							location.reload();
-						}
-					});
+					document
+						.getElementById(`del_${id.id}`)
+						.addEventListener("click", () => {
+							if (
+								confirm(
+									"Are you sure you want to delete this class?"
+								)
+							) {
+								fetch(
+									`http://localhost:3000/api/attendance/delete/${id.id}`,
+									{
+										method: "DELETE",
+									}
+								);
+								location.reload();
+							}
+						});
 				}
 			}, 100);
 

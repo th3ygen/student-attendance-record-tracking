@@ -11,6 +11,10 @@ app.use(bodyParser.json());
 (async () => {
     await require('./services/mongoose.service').connect();
     
+    // check if there is no user
+    // create a test users
+    require('./init')();
+
     app.use('/api', require('./routes'));
     
     app.listen(3000, () => {
