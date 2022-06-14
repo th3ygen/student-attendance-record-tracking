@@ -86,6 +86,7 @@
             </tbody>       
         </table>
     </div>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/global.js"></script>
     <script>
         if (localStorage.getItem("user") == null) {
@@ -103,10 +104,20 @@
                 });
 
                 if (req.status === 200) {
-                    alert("Lecturer Deleted");
+                    Swal.fire({
+                        title: 'Success',
+                        text: 'Lecturer Deleted Successfully',
+                        type: 'success',
+                        confirmButtonText: 'OK'
+                    });
                     window.location.reload();
                 } else {
-                    alert("Error");
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Lecturer Deletion Failed',
+                        type: 'error',
+                        confirmButtonText: 'OK'
+                    });
                 }
             }
         }
