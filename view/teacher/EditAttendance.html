@@ -127,6 +127,7 @@
 			integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 			crossorigin="anonymous"
 		></script>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script src="../js/global.js"></script>
 		<script>
 			let record = [];
@@ -159,10 +160,18 @@
 						const res = await req.json();
 						console.log(res);
 
-						alert('added')
+						Swal.fire({
+							title: 'Success',
+							text: 'Attendance recorded successfully',
+							type: 'success'
+						});
 						window.location.href = 'Attendance.html';
 					} else {
-						alert('failed')
+						Swal.fire({
+							title: 'Error',
+							text: 'Something went wrong',
+							type: 'error'
+						});
 					}
 
 				} catch (e) {

@@ -83,6 +83,7 @@
 				</form>
 			</section>
 		</div>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script type="text/javascript">
 			function link() {
 				window.location = "StudentView.html";
@@ -113,10 +114,20 @@
 				);
 
 				if (req.status === 200) {
-					alert("Student added successfully");
+					await Swal.fire({
+						title: "Success",
+						text: "Student added successfully",
+						type: "success",
+						confirmButtonText: "OK",
+					});
 					window.location = "StudentView.html";
 				} else {
-					alert("Error adding student");
+					Swal.fire({
+						title: "Error",
+						text: "Student not added",
+						type: "error",
+						confirmButtonText: "OK",
+					});
 				}
 
 				return true;

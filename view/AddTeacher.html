@@ -97,6 +97,7 @@
 			crossorigin="anonymous"
 			referrerpolicy="no-referrer"
 		></script>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script type="text/javascript">
 			function link() {
 				window.location = "TeacherView.html";
@@ -131,9 +132,19 @@
 				);
 
 				if (req.status === 200) {
-					alert("Lecturer added successfully");
+					Swal.fire({
+						title: "Success",
+						text: "Lecturer added successfully",
+						icon: "success",
+						confirmButtonText: "OK",
+					});
 				} else {
-					alert("Error adding lecturer");
+					Swal.fire({
+						title: "Error",
+						text: "Lecturer not added",
+						icon: "error",
+						confirmButtonText: "OK",
+					});
 				}
 
 				return false;

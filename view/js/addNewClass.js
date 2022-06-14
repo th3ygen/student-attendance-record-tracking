@@ -82,10 +82,20 @@ async function submit() {
         });
 
     if (req.status === 200) {
-        alert("Class added successfully");
+        await Swal.fire({
+            title: "Success",
+            text: "Class added",
+            icon: "success",
+            confirmButtonText: "OK",
+        });
         window.location.href = "./ManageClass.html";
     } else {
-        alert("Something went wrong");
+        Swal.fire({
+            title: "Error",
+            text: "Class not added",
+            icon: "error",
+            confirmButtonText: "OK",
+        });
     }
 
 }

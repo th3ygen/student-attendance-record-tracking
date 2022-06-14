@@ -86,6 +86,7 @@
 		</div>
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script>
 
 			async function userLogin(username, password) {
@@ -152,9 +153,20 @@
 				);
 
 				if (req.status === 200) {
+					Swal.fire({
+						title: "Success!",
+						text: "User successfully registered",
+						icon: "success",
+						confirmButtonText: "Close",
+					});
 					window.location.reload();
 				} else {
-					alert("Error registering user");
+					Swal.fire({
+						title: "Error!",
+						text: "Error registering user",
+						icon: "error",
+						confirmButtonText: "Close",
+					});
 				}
 			}
 
@@ -163,8 +175,6 @@
 
 			reg.addEventListener("submit", (e) => {
 				e.preventDefault();
-
-				alert("Registering user");
 
 				const name = document.querySelector("#rname").value;
 				const email = document.querySelector("#remail").value;

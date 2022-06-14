@@ -146,6 +146,8 @@
 			crossorigin="anonymous"
 		></script>
 
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 		<script src="../js/global.js"></script>
 
 		<script type="module">
@@ -186,10 +188,19 @@
 					);
 
 					if (req.status === 200) {
-						alert("Student Added");
+						await Swal.fire({
+							title: "Success",
+							text: "Student added successfully",
+							icon: "success",
+						});
+						
 						location.reload();
 					} else {
-						alert("Something Went Wrong");
+						Swal.fire({
+							title: "Error",
+							text: "Student Already Added",
+							icon: "error",
+						});
 					}
 				} catch (e) {
 					console.log(e);
@@ -213,10 +224,18 @@
 					);
 
 					if (req.status === 200) {
-						alert("Class Deleted");
+						Swal.fire({
+							title: "Success",
+							text: "Class deleted successfully",
+							icon: "success",
+						});
 						window.location.reload();
 					} else {
-						alert("Something Went Wrong");
+						Swal.fire({
+							title: "Error",
+							text: "Class not deleted",
+							icon: "error",
+						});
 					}
 				} catch (e) {
 					console.log(e);

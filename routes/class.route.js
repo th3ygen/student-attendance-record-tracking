@@ -18,7 +18,7 @@ router.get('/find', controller.getClass);
 router.post('/add', controller.addClass);
 router.post('/edit/:id', controller.editClass);
 
-/* router.get('/:id/students', controller.getStudentsByClassId); */
+router.get('/:id/students', controller.getStudentsByClassId);
 
 router.post('/delete', controller.deleteClass);
 

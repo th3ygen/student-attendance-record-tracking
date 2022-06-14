@@ -13,6 +13,11 @@
 			crossorigin="anonymous"
 		></script> -->
 
+		<script
+			src="https://kit.fontawesome.com/646cc00c51.js"
+			crossorigin="anonymous"
+		></script>
+
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
 			rel="stylesheet"
@@ -112,9 +117,7 @@
 							id="timeSlot2"
 							class="inputForm"
 						>
-							<option value="-">
-								-
-							</option>
+							<option value="-">-</option>
 							<option value="08.00am-10.00am">
 								08.00am-10.00am
 							</option>
@@ -187,6 +190,7 @@
 			integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
 			crossorigin="anonymous"
 		></script>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script src="../js/global.js"></script>
 		<script>
 			const table = document.querySelector("#studentTable");
@@ -282,10 +286,20 @@
 				);
 
 				if (req.status === 200) {
-					alert("Class update successfully");
+					await Swal.fire({
+						title: "Success",
+						text: "Class has been updated",
+						icon: "success",
+						confirmButtonText: "OK",
+					});
 					window.location.href = "ManageClass.html";
 				} else {
-					alert("Something went wrong");
+					Swal.fire({
+						title: "Error",
+						text: "Something went wrong",
+						icon: "error",
+						confirmButtonText: "OK",
+					});
 				}
 			}
 
@@ -294,7 +308,7 @@
 					const classId = localStorage.getItem("classId");
 
 					let req = await fetch(
-						`http://localhost:3000/api/class/${classId}`
+						`http://localhost:3000/api/class/find?id=${classId}`
 					);
 
 					if (req.status === 200) {
@@ -304,6 +318,8 @@
 							_class.class.name;
 						document.getElementById("maxStudent").value =
 							_class.class.maxStudent;
+						document.getElementById('timeSlot1').value = _class.class.timeSlot[0];
+						document.getElementById('timeSlot2').value = _class.class.timeSlot[1];
 
 						for (let std of _class.students) {
 							/* appendStudent(std.name); */
@@ -324,7 +340,7 @@
 					}
 
 					req = await fetch(
-						"http://localhost:3000/api/class/student/get"
+						"http://localhost:3000/api/class/students/get"
 					);
 
 					if (req.status === 200) {

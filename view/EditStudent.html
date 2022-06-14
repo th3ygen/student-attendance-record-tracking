@@ -83,6 +83,7 @@
 				</form>
 			</section>
 		</div>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script type="text/javascript">
 			function link() {
 				window.location = "StudentView.html";
@@ -106,10 +107,20 @@
 				});
 
 				if (req.status === 200) {
-					alert("Student Updated");
+					Swal.fire({
+						title: "Success",
+						text: "Student updated successfully",
+						type: "success",
+						confirmButtonText: "OK"
+					});
 					link();
 				} else {
-					alert("Error");
+					Swal.fire({
+						title: "Error",
+						text: "Student not updated",
+						type: "error",
+						confirmButtonText: "OK"
+					});
 				}
 
 				return false;

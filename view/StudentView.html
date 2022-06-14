@@ -79,7 +79,7 @@
             </tbody>       
         </table>
     </div>
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./js/global.js"></script>
     <script>
         if (localStorage.getItem("user") == null) {
@@ -97,10 +97,20 @@
                 });
 
                 if (req.status === 200) {
-                    alert("Student Deleted");
+                    Swal.fire({
+                        title: 'Success',
+                        text: 'Student Deleted',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    });
                     window.location.reload();
                 } else {
-                    alert("Error");
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Something went wrong',
+                        icon: 'error',
+                        confirmButtonText: 'OK'
+                    });
                 }
             }
             
