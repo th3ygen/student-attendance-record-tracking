@@ -64,14 +64,18 @@
 				</div>
 			</div>
 		</div>
+		<!-- <div class="undo">
+			<div class="text"></div>
+		</div> -->
 		<div class="mcontainer" style="padding-top: 130px">
 			<div class="heading">
 				<div class="title">
 					<h3>Notification</h3>
 				</div>
 				<div class="actions">
-					<div class="button">
+					<div class="button" onclick="toBin()">
 						<i class="gg-trash"></i>Recycle bin<span
+						id="binsize"
 							class="badge text-bg-secondary"
 							>1</span
 						>
@@ -79,37 +83,8 @@
 				</div>
 			</div>
 
-			<div class="accordion accordion-flush" id="accordionFlushExample">
-				<div class="accordion-item ">
-					<h2 class="accordion-header" id="flush-headingOne">
-						<button
-							class="accordion-button collapsed"
-							type="button"
-							data-bs-toggle="collapse"
-							data-bs-target="#flush-collapseOne"
-							aria-expanded="false"
-							aria-controls="flush-collapseOne"
-						>
-							Student 'Muhammad Aidil Syazwan bin Hamdan' was absent for the 3rd times today
-						</button>
-					</h2>
-					<div
-						id="flush-collapseOne"
-						class="accordion-collapse collapse"
-						aria-labelledby="flush-headingOne"
-						data-bs-parent="#accordionFlushExample"
-					>
-						<div class="noti-actions">
-							<div class="action"><i class="gg-check"></i></div>
-							<div class="action" style="background: red">
-								<i class="gg-trash"></i>
-							</div>
-						</div>
-						<div class="accordion-body">
-							Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet repellat laborum labore eius magni totam maxime autem quos nemo atque pariatur velit tenetur fugiat debitis eveniet ipsa voluptas qui quibusdam, maiores laudantium unde deserunt recusandae voluptate aliquam. Excepturi dolor ea hic unde dolores reprehenderit, exercitationem quam dolorem! Esse minus laborum, odit at eos facilis, dolorem soluta harum illum, nulla debitis explicabo? Minima est itaque, nisi quam maiores animi, non, cum consectetur earum corporis ad aspernatur nulla deleniti qui. Quidem odit, veritatis perspiciatis modi quis provident eaque? Amet dolorem magnam repellendus similique excepturi corrupti vitae dicta libero ex quo. Eos, totam.
-						</div>
-					</div>
-				</div>
+			<div class="accordion accordion-flush" id="notis">
+				
 			
 			</div>
 		</div>
@@ -118,18 +93,117 @@
 			integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
 			crossorigin="anonymous"
 		></script>
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 		<script src="../js/global.js"></script>
 		<script>
+			let id = 0;
+
 			if (localStorage.getItem("user") == null) {
 				window.location.href = "index.html";
+			}
+
+			async function moveToBin(id) {
+				const res = await fetch('http://localhost:3000/api/notification/tobin/'+id);
+
+				if (res.status === 200) {
+					await Swal.fire({
+						title: "Success",
+						text: "Notification moved to recycle bin",
+						icon: "success",
+						showConfirmButton: false,
+						timer: 1500
+					});
+
+					window.location.reload();
+				} else {
+					Swal.fire({
+						title: "Error",
+						text: "Something went wrong",
+						icon: "error",
+						showConfirmButton: false,
+						timer: 1500
+					});
+					console.log(res);
+				}
 			}
 
 			try {
 				const user = JSON.parse(localStorage.getItem("user"));
 
 				document.querySelector("#name").innerHTML = user.name;
+
+				(async () => {
+					const res = await fetch('http://localhost:3000/api/notification/binsize');
+
+					if (res.status === 200) {
+						const data = await res.json();
+						console.log(data);
+						document.querySelector('#binsize').innerHTML = await data.binSize;
+					}
+
+					let response = await fetch(
+						"http://localhost:3000/api/notification/get",
+					);
+
+					if (response.status === 200) {
+						const data = await response.json();
+
+						const noti = document.querySelector("#notis");
+						
+						for (let i of data.notifications) {
+							if (i.status === 'bin') {
+								continue;
+							}
+
+							noti.innerHTML += 
+							`
+							<div class="accordion-item ">
+								<h2 class="accordion-header" id="flush-headingOne">
+									<button
+										class="accordion-button collapsed"
+										type="button"
+										data-bs-toggle="collapse"
+										data-bs-target="#flush-collapseOne"
+										aria-expanded="false"
+										aria-controls="flush-collapseOne"
+									>
+										${i.title}
+									</button>
+								</h2>
+								<div
+									id="flush-collapseOne"
+									class="accordion-collapse collapse"
+									aria-labelledby="flush-headingOne"
+									data-bs-parent="#accordionFlushExample"
+								>
+									<div class="noti-actions">
+										<div class="action"><i class="gg-check"></i></div>
+										<div class="action" style="background: red" id="btn-${++id}">
+											<i class="gg-trash"></i>
+										</div>
+									</div>
+									<div class="accordion-body">
+										${i.content}
+									</div>
+								</div>
+							</div>
+							`
+
+							document.querySelector(`#btn-${id}`).addEventListener('click', () => {
+								moveToBin(i._id);
+							});
+						}
+						
+					}
+					
+					
+				})();
 			} catch (e) {
 				console.log(e);
+			}
+
+			function toBin() {
+				window.location.href = "/view/teacher/NotificationRecycleBin.html";
 			}
 		</script>
 	</body>

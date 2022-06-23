@@ -33,5 +33,52 @@ module.exports = {
                 message: e.message,
             });
         }
+    },
+    toBin: async (req, res) => {
+        try {
+            const notification = await _Notification.findById(req.params.id);
+
+            notification.status = 'bin';
+
+            await notification.save();
+
+            res.status(200).json({
+                notification,
+            });
+        } catch (e) {
+            res.status(500).json({
+                message: e.message,
+            });
+        }
+    },
+    recover: async (req, res) => {
+        try {
+            const notification = await _Notification.findById(req.params.id);
+
+            notification.status = 'unread';
+
+            await notification.save();
+
+            res.status(200).json({
+                notification,
+            });
+        } catch (e) {
+            res.status(500).json({
+                message: e.message,
+            });
+        }
+    },
+    getBinSize: async (req, res) => {
+        try {
+            const binSize = await _Notification.countDocuments({ status: 'bin' });
+
+            res.status(200).json({
+                binSize,
+            });
+        } catch (e) {
+            res.status(500).json({
+                message: e.message,
+            });
+        }
     }
 }

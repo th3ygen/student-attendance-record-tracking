@@ -42,13 +42,16 @@ module.exports = {
 	getAttendances: async (req, res) => {
 		try {
 			const attendances = await _Attendance.find();
-
 			const result = [];
+
+			console.log(attendances);
+
 			for (let attendance of attendances) {
 				let data = {};
-
-				const classId = attendance.classId;
+				
+				const classId = attendance.classId.toString();
 				const _class = await _Class.findById(classId);
+				console.log(classId, _class);
 				attendance.className = _class.name;
 
 				const total = attendance.list.length;

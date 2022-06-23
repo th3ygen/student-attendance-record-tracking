@@ -57,7 +57,9 @@
 						<i class="fa-solid fa-user"></i>
 					</div>
 					<div class="name" id="name">Lorem ipsum dolor sit amet</div>
-					<div class="logout" onclick="logout()"><i class="gg-log-out"></i></div>
+					<div class="logout" onclick="logout()">
+						<i class="gg-log-out"></i>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -89,10 +91,7 @@
 					<div class="item" style="flex: 1 1 40%">
 						<div class="label">Timeslot</div>
 						<div class="input">
-							<select class="listForm" id="timeslot">
-								
-								
-							</select>
+							<select class="listForm" id="timeslot"></select>
 						</div>
 					</div>
 
@@ -129,47 +128,49 @@
 			let record = [];
 
 			async function save() {
-				const classId = document.querySelector('#classList').value;
-				const date = document.querySelector('#date').value;
-				const timeslot = document.querySelector('#timeslot').value;
+				const classId = document.querySelector("#classList").value;
+				const date = document.querySelector("#date").value;
+				const timeslot = document.querySelector("#timeslot").value;
 
-				const data = record.map(d => ({
-					studentId: d._id, 
-					status: d.status
-				}))
+				const data = record.map((d) => ({
+					studentId: d._id,
+					status: d.status,
+				}));
 
 				try {
-					const req = await fetch('http://localhost:3000/api/attendance/add', {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify({
-							classId,
-							date,
-							timeslot,
-							list: data
-						})
-					});
+					const req = await fetch(
+						"http://localhost:3000/api/attendance/add",
+						{
+							method: "POST",
+							headers: {
+								"Content-Type": "application/json",
+							},
+							body: JSON.stringify({
+								classId,
+								date,
+								timeslot,
+								list: data,
+							}),
+						}
+					);
 
 					if (req.status === 200) {
 						const res = await req.json();
 						console.log(res);
 
 						await Swal.fire({
-							title: 'Success',
-							text: 'Attendance recorded successfully',
-							type: 'success'
+							title: "Success",
+							text: "Attendance recorded successfully",
+							type: "success",
 						});
-						window.location.href = 'Attendance.html';
+						window.location.href = "Attendance.html";
 					} else {
 						Swal.fire({
-							title: 'Error',
-							text: 'Something went wrong',
-							type: 'error'
+							title: "Error",
+							text: "Something went wrong",
+							type: "error",
 						});
 					}
-
 				} catch (e) {
 					console.log(e);
 				}
@@ -182,9 +183,7 @@
 							${name}
 						</div>
 						<div class="recActions" data-id="${id}">
-							<div class="action" style="background: rgb(248, 61, 61)">
-								<i class='gg-user-add'></i>
-							</div>
+							
 							<div class="action">
 								Absent
 							</div>
@@ -202,7 +201,7 @@
 				);
 
 				if (req.status === 200) {
-					const {students} = await req.json();
+					const { students } = await req.json();
 
 					for (let student of students) {
 						studentsTable.innerHTML += appendStudent(
@@ -210,34 +209,97 @@
 							student._id
 						);
 
-						student.status = 'attend';
+						student.status = "attend";
 					}
 					record = students;
+
+					setTimeout(() => {
+						document
+							.querySelectorAll(".recActions .action")
+							.forEach((e) => {
+								e.addEventListener("click", (e) => {
+									let status = e.target.innerHTML;
+									const elem = e.target.parentElement;
+									const id = elem.dataset.id;
+
+									let s = status.split(">");
+
+									if (s.length > 1) {
+										status = s[2].replace(
+											/[^a-zA-Z ]/g,
+											""
+										);
+									} else {
+										status = s[0].replace(
+											/[^a-zA-Z ]/g,
+											""
+										);
+									}
+
+									// remove whitespace
+									status = status.trim().toLowerCase();
+
+									// edit record
+									for (let i = 0; i < record.length; i++) {
+										if (record[i]._id === id) {
+											record[i].status = status;
+											break;
+										}
+									}
+
+									
+									const act = elem.querySelectorAll("div");
+									console.log(status, act);
+									if (status === "absent") {
+										act[0].classList.add("active");
+										act[1].classList.remove("active");
+
+										act[0].innerHTML =
+											'<i class="gg-check"></i> Absent';
+										act[1].innerHTML = "Attend";
+									} else {
+										act[0].classList.remove("active");
+										act[1].classList.add("active");
+
+										act[0].innerHTML = "Absent";
+										act[1].innerHTML =
+											'<i class="gg-check"></i> Attend';
+									}
+								});
+							});
+					}, 100);
 				} else {
 					console.log(req);
 				}
 			}
 
 			async function loadClass(id) {
-				let req = await fetch('http://localhost:3000/api/class/find?id=' + id);
+				let req = await fetch(
+					"http://localhost:3000/api/class/find?id=" + id
+				);
 
 				if (req.status === 200) {
 					const _class = await req.json();
-					
-					document.querySelector('#timeslot').innerHTML = _class.class.timeSlot.map(i => {
-						return `<option value="${i}">${i}</option>`;
-					}).join('');
+
+					document.querySelector("#timeslot").innerHTML =
+						_class.class.timeSlot
+							.map((i) => {
+								return `<option value="${i}">${i}</option>`;
+							})
+							.join("");
 				} else {
 					console.log(req);
 				}
 			}
 
 			window.onload = async () => {
-				document.querySelector('#form').addEventListener('submit', (e) => {
-					e.preventDefault();
-					save();
-					return false;
-				});
+				document
+					.querySelector("#form")
+					.addEventListener("submit", (e) => {
+						e.preventDefault();
+						save();
+						return false;
+					});
 
 				const classList = document.querySelector("#classList");
 				const studentsTable = document.querySelector("#studentsTable");
@@ -270,52 +332,6 @@
 				} catch (e) {
 					console.log(e);
 				}
-
-				setTimeout(() => {
-					document.querySelectorAll('.recActions .action').forEach(e => {
-						e.addEventListener('click', (e) => {
-							let status = e.target.innerHTML;
-							const elem = e.target.parentElement;
-							const id = elem.dataset.id;
-
-							let s = status.split('>');
-
-							if (s.length > 1) {
-								status = s[2].replace(/[^a-zA-Z ]/g, "");
-							} else {
-								status = s[0].replace(/[^a-zA-Z ]/g, "");
-							}
-
-							// remove whitespace
-							status = status.trim().toLowerCase();
-							
-							// edit record
-							for (let i = 0; i < record.length; i++) {
-								if (record[i]._id === id) {
-									record[i].status = status;
-									break;
-								}
-							}
-
-							const act = elem.querySelectorAll('div');
-							if (status === 'absent') {
-								act[1].classList.add('active');
-								act[2].classList.remove('active');
-
-								act[1].innerHTML = '<i class="gg-check"></i> Absent';
-								act[2].innerHTML = 'Attend';
-								
-							} else {
-								act[1].classList.remove('active');
-								act[2].classList.add('active');
-
-								act[1].innerHTML = 'Absent';
-								act[2].innerHTML = '<i class="gg-check"></i> Attend';
-							}
-						});
-					});
-
-				}, 100);
 			};
 		</script>
 	</body>

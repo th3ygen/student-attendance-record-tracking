@@ -7,6 +7,10 @@ router.get('/', (req, res) => {
 
 router.get('/get', controller.getNotifications)
 
+router.get('/tobin/:id', controller.toBin)
+router.get('/recover/:id', controller.recover)
+router.get('/binsize', controller.getBinSize)
+
 router.post('/new', controller.pushNotification)
 
 module.exports = router;

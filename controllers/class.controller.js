@@ -84,6 +84,15 @@ module.exports = {
 
 			await _Class.findByIdAndDelete(classId);
 
+			// delete all attendance related to the class
+			const attendance = await _Attendance.find({
+				classId,
+			});
+
+			for (let _attendance of attendance) {
+				await _Attendance.findByIdAndDelete(_attendance._id);
+			}
+
 			res.status(200).json({
 				message: "Class deleted",
 			});
